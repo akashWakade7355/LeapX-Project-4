@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+     <style>
+            body{
+    background:#0f1117;
+    color:white;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+/*==================================
+        Floating Chat Widget
+===================================*/
+
+.chat-widget{
+
+    position:fixed;
+
+    bottom:30px;
+
+    right:30px;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    gap:15px;
+
+    z-index:999;
+
+}
+
+/* Chat Popup */
+
+.chat-popup{
+
+    background:linear-gradient(180deg,#172547,#101B34);
+
+    border:1px solid #2C4F87;
+
+    padding:18px 22px;
+
+    border-radius:18px;
+
+    color:white;
+
+    width:230px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.35);
+
+    animation:float 3s ease-in-out infinite;
+
+}
+
+.chat-popup h6{
+
+    color:#60A5FA;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+}
+
+.chat-popup p{
+
+    color:#B8CAE6;
+
+    margin:0;
+
+    font-size:.95rem;
+
+}
+
+/* Chat Button */
+
+.chat-btn{
+
+    width:72px;
+
+    height:72px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:linear-gradient(135deg,#3B82F6,#2563EB);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    box-shadow:0 12px 35px rgba(37,99,235,.45);
+
+    transition:.3s;
+
+    overflow:hidden;
+
+}
+
+.chat-btn img{
+
+    width:60px;
+
+    height:60px;
+
+    object-fit:contain;
+
+}
+
+.chat-btn:hover{
+
+    transform:scale(1.08);
+
+    box-shadow:0 20px 45px rgba(37,99,235,.55);
+
+}
+/* Floating Animation */
+
+@keyframes float{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-8px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/*=========================
+      MODERN header
+==========================*/
+
+.modern-footer{
+
+
+    background:#0f1117;
+
+
+    border-top:1px solid #243B65;
+
+    padding:22px 0;
+
+}
+
+.footer-wrapper{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+}
+
+.footer-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:35px;
+
+}
+
+.footer-left a{
+
+    text-decoration:none;
+
+    color:#9AAFD2;
+
+    font-weight:600;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    transition:.3s;
+
+}
+
+.footer-left a:hover{
+
+    color:white;
+
+}
+
+.footer-left .active{
+
+    color:white;
+
+}
+
+.footer-logo{
+
+    font-size:1.6rem;
+
+    color:#60A5FA !important;
+
+}
+
+.footer-center{
+
+    color:#AFC2E7;
+
+    font-weight:600;
+
+    font-size:1rem;
+
+}
+
+.footer-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+.create-btn{
+
+    border:none;
+
+    background:none;
+
+    color:white;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.create-btn:hover{
+
+    color:#60A5FA;
+
+}
+
+.footer-icon{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#1B315C;
+
+    color:white;
+
+    position:relative;
+
+    transition:.3s;
+
+}
+
+.footer-icon:hover{
+
+    background:#3B82F6;
+
+}
+
+.notification span{
+
+    position:absolute;
+
+    width:10px;
+
+    height:10px;
+
+    background:#ff3b3b;
+
+    border-radius:50%;
+
+    top:7px;
+
+    right:8px;
+
+}
+
+.footer-profile{
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:2px solid #3B82F6;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.footer-profile:hover{
+
+    transform:scale(1.08);
+
+}
+
+/*=========================
+        HERO
+=========================*/
+
+.city-hero{
+
+    height:100vh;
+
+    position:relative;
+
+    background:url("https://images.contentstack.io/v3/assets/blt06f605a34f1194ff/blt458ff53ec82948bc/68b44bd0cf9666de2aec68c2/BCC-2024-EXPLORER-EXPLORER-LANDING-PAGE-Bangalore_MOBILE.jpg?fit=crop&auto=webp&quality=60&crop=smart&format=avif") center center/cover no-repeat;
+
+    overflow:hidden;
+
+}
+
+/* Dark Overlay */
+
+.city-hero .overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    linear-gradient(
+    90deg,
+    rgba(0,0,0,.72) 0%,
+    rgba(0,0,0,.48) 35%,
+    rgba(0,0,0,.08) 70%,
+    rgba(0,0,0,.05) 100%
+    );
+
+   
+
+}
+
+/* Container */
+
+.city-hero .container{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+/* Icon */
+
+.hero-icon{
+
+    width:78px;
+
+    height:78px;
+
+    border-radius:50%;
+
+    border:2px solid rgba(255,255,255,.35);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    font-size:34px;
+
+    margin-bottom:40px;
+
+}
+
+/* Small Heading */
+
+.hero-small{
+
+    color:#d7d7d7;
+
+    font-size:55px;
+
+    font-weight:300;
+
+}
+
+/* Main Heading */
+
+.hero-title{
+
+    color:white;
+
+    font-size:92px;
+
+    font-weight:700;
+
+    margin:10px 0 30px;
+
+}
+
+/* Time */
+
+.hero-time{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    color:#d8d8d8;
+
+    font-size:24px;
+
+    margin-bottom:35px;
+
+}
+
+/* Divider */
+
+.city-hero hr{
+
+    width:90%;
+
+    border-color:rgba(255,255,255,.25);
+
+    margin-bottom:35px;
+
+}
+
+/* Description */
+
+.hero-description{
+
+    width:90%;
+
+    color:#ececec;
+
+    font-size:26px;
+
+    line-height:1.8;
+
+    margin-bottom:45px;
+
+}
+
+/* Button */
+
+.subscribe-btn-1{
+
+    width:260px;
+
+    height:68px;
+
+    border-radius:50px;
+
+    background:rgba(255,255,255,.15);
+
+    backdrop-filter:blur(12px);
+
+    color:white;
+
+    font-size:28px;
+
+    font-weight:600;
+
+    border:none;
+
+}
+
+.subscribe-btn:hover{
+
+    background:rgba(255,255,255,.22);
+
+    color:white;
+
+}
+
+/* Responsive */
+
+@media(max-width:992px){
+
+.hero-title{
+
+font-size:62px;
+
+}
+
+.hero-small{
+
+font-size:34px;
+
+}
+
+.hero-description{
+
+font-size:18px;
+
+width:100%;
+
+}
+
+.hero-time{
+
+font-size:18px;
+
+}
+
+.subscribe-btn{
+
+width:200px;
+
+height:55px;
+
+font-size:20px;
+
+}
+
+.hero-icon{
+
+width:65px;
+height:65px;
+font-size:26px;
+
+}
+
+}
+
+
+/* =================  Events ================= */
+
+.nearby-events{
+
+    background:#121316;
+    padding:90px 0;
+
+}
+
+.section-heading{
+
+    color:#fff;
+    font-weight:700;
+}
+
+/* Timeline */
+
+.timeline{
+
+    border-left:2px dashed #303236;
+    margin-left:15px;
+
+}
+
+.timeline-item{
+
+    position:relative;
+    padding-left:30px;
+    margin-bottom:45px;
+
+}
+
+.timeline-item::before{
+
+    content:"";
+
+    width:12px;
+    height:12px;
+
+    background:#666;
+
+    border-radius:50%;
+
+    position:absolute;
+    left:-7px;
+    top:8px;
+
+}
+
+.date{
+
+    margin-bottom:15px;
+
+}
+
+.date span{
+
+    color:#fff;
+    font-size:26px;
+    font-weight:700;
+
+}
+
+.date small{
+
+    color:#888;
+    font-size:22px;
+
+}
+
+/* Card */
+
+.event-card{
+
+    background:#1b1d21;
+
+    border-radius:20px;
+
+    padding:20px 22px;
+
+    transition:.3s;
+
+}
+
+.event-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+
+}
+
+.event-time{
+
+    color:#8e8e8e;
+    font-size:17px;
+    margin-bottom:6px;
+
+}
+
+.event-card h4{
+
+    color:#fff;
+    font-size:28px;
+    margin-bottom:10px;
+
+}
+
+.host,
+.location{
+
+    color:#9b9b9b;
+    margin-bottom:8px;
+    font-size:18px;
+
+}
+
+.banner{
+
+    width:140px;
+    height:140px;
+
+    object-fit:cover;
+
+    border-radius:16px;
+
+}
+
+/* Attendees */
+
+.attendees{
+
+    display:flex;
+    align-items:center;
+    margin-top:15px;
+
+}
+
+.attendees img{
+
+    width:30px;
+    height:30px;
+
+    border-radius:50%;
+
+    border:2px solid #1b1d21;
+
+    margin-left:-8px;
+
+}
+
+.attendees img:first-child{
+
+    margin-left:0;
+
+}
+
+.sold{
+
+    background:#532727;
+
+    color:#ff7d7d;
+
+    padding:4px 12px;
+
+    border-radius:8px;
+
+    font-size:13px;
+
+    margin-right:15px;
+
+}
+
+.count{
+
+    width:30px;
+    height:30px;
+
+    border-radius:50%;
+
+    background:#34373e;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    margin-left:-8px;
+
+    color:#fff;
+    font-size:13px;
+
+}
+
+/* Right */
+
+.community-card{
+
+    margin-top:15px;
+
+}
+
+.community-icon{
+
+    width:65px;
+    height:65px;
+
+    border-radius:50%;
+
+    background:#d6a20a;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:white;
+    font-size:26px;
+
+    margin-bottom:20px;
+
+}
+
+.community-card h2{
+
+    color:#fff;
+
+}
+
+.community-card p{
+
+    color:#9d9d9d;
+    line-height:1.8;
+    margin:18px 0;
+
+}
+
+.subscribe-btn{
+
+    width:100%;
+    height:52px;
+
+    border-radius:40px;
+
+    background:#2c2d32;
+
+    color:#fff;
+
+}
+
+.subscribe-btn:hover{
+
+    background:#3a3b40;
+    color:#fff;
+
+}
+
+.map-card img{
+
+    width:100%;
+    border-radius:20px;
+
+}
+
+
+
+     </style>
+</head>
+<body>
+
+     <!--=========================
+        Modern header
+==========================-->
+
+<header class="modern-footer">
+
+    <div class="container-fluid px-5">
+
+        <div class="footer-wrapper">
+
+            <!-- Left -->
+
+            <div class="footer-left">
+
+                <a href="#" class="footer-logo">
+
+                    <i class="bi bi-stars"></i>
+
+                </a>
+
+                <a href="../registeredEvents.html" >
+                    <i class="bi bi-calendar-event"></i>
+                    Registered Events
+                </a>
+
+                <a href="./homepage.html"  class="active">
+
+                    <i class="bi bi-compass"></i>
+
+                    Discover
+
+                </a>
+
+            </div>
+
+            <!-- Center -->
+
+            <div class="footer-center">
+
+                <span id="liveTime">
+
+                    4:43 PM IST
+
+                </span>
+
+            </div>
+
+            <!-- Right -->
+
+            <div class="footer-right">
+
+                 <a href="../Admin/createEvent.html">
+                    <button class="create-btn">
+
+                    Create Event
+
+                </button>
+
+                </a>
+
+                <button class="footer-icon">
+
+                    <i class="bi bi-search"></i>
+
+                </button>
+
+                <button class="footer-icon notification">
+
+                    <i class="bi bi-bell"></i>
+
+                    <span></span>
+
+                </button>
+
+                <img
+                    src="https://i.pravatar.cc/100?img=15"
+                    class="footer-profile"
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+    
+
+<!--=========================
+        Hero Section
+==========================-->
+
+<section class="city-hero">
+
+    <!-- Overlay -->
+    <div class="overlay"></div>
+
+    <div class="container h-100">
+
+        <div class="row h-100 align-items-center">
+
+            <div class="col-lg-6">
+
+                <!-- Icon -->
+
+                <!-- <div class="hero-icon">
+
+                    <i class="bi bi-buildings"></i>
+
+                </div> -->
+
+                <!-- Heading -->
+
+                <h3 class="hero-small">
+                    What's Happening in
+                </h3>
+
+                <h1 class="hero-title">
+                    Bengaluru
+                </h1>
+
+                <!-- Time -->
+
+                <div class="hero-time">
+
+                    <i class="bi bi-clock"></i>
+
+                    <span>11:17 AM IST</span>
+
+                </div>
+
+                <hr>
+
+                <!-- Description -->
+
+                <p class="hero-description">
+
+                    Discover events from AI to climate and travel in
+                    Bengaluru. The community in this vibrant city
+                    comes together for a brighter, more meaningful
+                    future.
+
+                </p>
+
+                <!-- Button -->
+
+                <button class="btn subscribe-btn-1">
+
+                    Subscribed
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--Events-->
+
+
+<section class="nearby-events py-5">
+
+    <div class="container">
+
+        <div class="row g-5">
+
+            <!-- LEFT -->
+
+            <div class="col-lg-8">
+
+                <h2 class="section-heading mb-5">
+                    Nearby Events
+                </h2>
+
+                <div class="timeline">
+
+                    <!-- Event 1 -->
+
+                    <div class="timeline-item">
+
+                        <div class="date">
+                            <span>13 Jul</span>
+                            <small>Monday</small>
+                        </div>
+
+                        <div class="event-card">
+
+                            <div class="row align-items-center">
+
+                                <div class="col-md-9">
+
+                                    <p class="event-time">
+                                        11:00 AM
+                                    </p>
+
+                                    <h4>
+                                        ☕ Miro Monday Meetup | Pune
+                                    </h4>
+
+                                    <p class="host">
+                                        By Sudhir Kesharwani & Miro Community
+                                    </p>
+
+                                    <p class="location">
+                                        <i class="bi bi-geo-alt"></i>
+                                        Quick Stories - Fine Dine Bistro
+                                    </p>
+
+                                    <div class="attendees">
+
+                                        <span class="sold">Sold Out</span>
+
+                                        <img src="https://i.pravatar.cc/35?img=1">
+                                        <img src="https://i.pravatar.cc/35?img=2">
+                                        <img src="https://i.pravatar.cc/35?img=3">
+                                        <img src="https://i.pravatar.cc/35?img=4">
+
+                                        <span class="count">+19</span>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-3 text-end">
+
+                                    <img src="images/event1.jpg" class="banner">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Event 2 -->
+
+                    <div class="timeline-item">
+
+                        <div class="date">
+                            <span>18 Jul</span>
+                            <small>Saturday</small>
+                        </div>
+
+                        <div class="event-card">
+
+                            <div class="row align-items-center">
+
+                                <div class="col-md-9">
+
+                                    <p class="event-time">
+                                        10:00 AM
+                                    </p>
+
+                                    <h4>
+                                        Decode Process Intelligence
+                                    </h4>
+
+                                    <p class="host">
+                                        By Celonis Community
+                                    </p>
+
+                                    <p class="location">
+                                        <i class="bi bi-geo-alt"></i>
+                                        Clover Park
+                                    </p>
+
+                                    <div class="attendees">
+
+                                        <img src="https://i.pravatar.cc/35?img=10">
+                                        <img src="https://i.pravatar.cc/35?img=11">
+                                        <img src="https://i.pravatar.cc/35?img=12">
+
+                                        <span class="count">+67</span>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-3 text-end">
+
+                                    <img src="images/event2.jpg" class="banner">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- RIGHT -->
+
+            <div class="col-lg-4">
+
+                <div class="community-card">
+
+                    <div class="community-icon">
+
+                        <i class="bi bi-grid-3x3-gap-fill"></i>
+
+                    </div>
+
+                    <h2>Banglore</h2>
+
+                    <p>
+
+                        Subscribe to stay updated with the latest
+                        events, workshops and community meetups.
+
+                    </p>
+
+                    <button class="btn subscribe-btn">
+
+                        Subscribed
+
+                    </button>
+
+                </div>
+
+                <div class="map-card mt-4">
+
+                    <img src="images/map.jpg">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+
+
+
+    <!--chatbot-->
+    <div class="chat-widget">
+
+    <div class="chat-popup">
+
+        <h6>
+            💬 Need Help?
+        </h6>
+
+        <p>
+            Ask me about events.
+        </p>
+
+    </div>
+
+    <button class="chat-btn">
+
+        <img
+            src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png"
+            alt="AI Bot"
+        >
+
+    </button>
+
+</div>
+
+
+
+</body>
+</html>
