@@ -38,41 +38,188 @@ body{
     color:#fff;
 }
 
-/*==================================
-Navbar
-==================================*/
+/*=========================
+      MODERN header
+==========================*/
 
-.navbar{
+.modern-footer{
 
-    background:#111827;
 
-    border-bottom:1px solid rgba(255,255,255,.08);
+    background:#0f1117;
 
-    padding:18px 0;
+
+    border-top:1px solid #243B65;
+
+    padding:22px 0;
+
 }
 
-.navbar-brand{
+.footer-wrapper{
 
-    color:#fff;
-    font-size:26px;
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
 }
 
-.navbar-brand:hover{
+.footer-left{
 
-    color:#3B82F6;
+    display:flex;
+
+    align-items:center;
+
+    gap:32px;
+
 }
 
-.profile-img{
+.footer-left a{
 
-    width:45px;
+    text-decoration:none;
 
-    height:45px;
+    color:#9AAFD2;
+
+    font-weight:600;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    transition:.3s;
+
+}
+
+.footer-left a:hover{
+
+    color:white;
+
+}
+
+.footer-left .active{
+
+    color:white;
+
+}
+
+.footer-logo{
+
+    font-size:1.6rem;
+
+    color:#60A5FA !important;
+
+}
+
+.footer-center{
+
+    color:#AFC2E7;
+
+    font-weight:600;
+
+    font-size:1rem;
+
+}
+
+.footer-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+.create-btn{
+
+    border:none;
+
+    background:none;
+
+    color:white;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.create-btn:hover{
+
+    color:#60A5FA;
+
+}
+
+.footer-icon{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#1B315C;
+
+    color:white;
+
+    position:relative;
+
+    transition:.3s;
+
+}
+
+.footer-icon:hover{
+
+    background:#3B82F6;
+
+}
+
+.notification span{
+
+    position:absolute;
+
+    width:10px;
+
+    height:10px;
+
+    background:#ff3b3b;
+
+    border-radius:50%;
+
+    top:7px;
+
+    right:8px;
+
+}
+
+.footer-profile{
+
+    width:46px;
+
+    height:46px;
 
     border-radius:50%;
 
     object-fit:cover;
 
-    border:3px solid #2563EB;
+    border:2px solid #3B82F6;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.footer-profile:hover{
+
+    transform:scale(1.08);
+
 }
 
 /*==================================
@@ -461,35 +608,96 @@ Responsive
 
 <body>
 
+ <!--=========================
+        Modern header
+==========================-->
 
-<!-- ==========================================
-Navbar
-=========================================== -->
+<header class="modern-footer">
 
-<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid px-5">
 
-    <div class="container">
+        <div class="footer-wrapper">
 
-        <a class="navbar-brand fw-bold" href="#">
-            EventHub
-        </a>
+            <!-- Left -->
 
-        <div class="d-flex align-items-center">
+            <div class="footer-left">
 
-            <button class="btn btn-primary me-3">
-                <i class="bi bi-plus-circle"></i>
-                Create Event
-            </button>
+                <a href="#" class="footer-logo">
 
-            <img src="https://i.pravatar.cc/100"
-                class="profile-img">
+                    <i class="bi bi-stars"></i>
+
+                </a>
+
+                <a href="../User/registeredEvents.html" class="active">
+                    <i class="bi bi-calendar-event"></i>
+                    Registered Events
+                </a>
+
+                <a href="../User/homepage.html" >
+
+                    <i class="bi bi-compass"></i>
+
+                    Discover
+
+                </a>
+                 <a href="./orgaisers-dashboard.html">
+                    <i class="bi bi-calendar-event"></i>
+                    host
+                </a>
+
+            </div>
+
+            <!-- Center -->
+
+            <div class="footer-center">
+
+                <span id="liveTime">
+
+                    4:43 PM IST
+
+                </span>
+
+            </div>
+
+            <!-- Right -->
+
+            <div class="footer-right">
+
+               <a href="../Admin/createEvent.html">
+                    <button class="create-btn">
+
+                    Create Event
+
+                </button>
+
+                </a>
+
+                <button class="footer-icon">
+
+                    <i class="bi bi-search"></i>
+
+                </button>
+
+                <button class="footer-icon notification">
+
+                    <i class="bi bi-bell"></i>
+
+                    <span></span>
+
+                </button>
+
+                <img
+                    src="https://i.pravatar.cc/100?img=15"
+                    class="footer-profile"
+                >
+
+            </div>
 
         </div>
 
     </div>
 
-</nav>
-
+</header>
 
 
 

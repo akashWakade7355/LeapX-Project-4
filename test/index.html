@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>chatbot-inedex</title>
+    <!-- Bootstrap -->
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons -->
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+
+    <style>
+      body {
+        background: #0f1117;
+        color: white;
+        font-family: "Poppins", sans-serif;
+      }
+      /*==================================
+Google Font
+==================================*/
+
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+      /*==================================
+        Floating Chat Widget
+===================================*/
+
+      .chat-widget {
+        position: fixed;
+
+        bottom: 30px;
+
+        right: 30px;
+
+        display: flex;
+
+        align-items: flex-end;
+
+        gap: 15px;
+
+        z-index: 999;
+      }
+
+      /* Chat Popup */
+
+      .chat-popup {
+        background: linear-gradient(180deg, #172547, #101b34);
+
+        border: 1px solid #2c4f87;
+
+        padding: 18px 22px;
+
+        border-radius: 18px;
+
+        color: white;
+
+        width: 230px;
+
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .chat-popup h6 {
+        color: #60a5fa;
+
+        font-weight: 700;
+
+        margin-bottom: 8px;
+      }
+
+      .chat-popup p {
+        color: #b8cae6;
+
+        margin: 0;
+
+        font-size: 0.95rem;
+      }
+
+      /* Chat Button */
+
+      .chat-btn {
+        width: 72px;
+
+        height: 72px;
+
+        border: none;
+
+        border-radius: 50%;
+
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        cursor: pointer;
+
+        box-shadow: 0 12px 35px rgba(37, 99, 235, 0.45);
+
+        transition: 0.3s;
+
+        overflow: hidden;
+      }
+
+      .chat-btn img {
+        width: 60px;
+
+        height: 60px;
+
+        object-fit: contain;
+      }
+
+      .chat-btn:hover {
+        transform: scale(1.08);
+
+        box-shadow: 0 20px 45px rgba(37, 99, 235, 0.55);
+      }
+      /* Floating Animation */
+
+      @keyframes float {
+        0% {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(-8px);
+        }
+
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+
+      /*==================================
+        Chat Window
+==================================*/
+
+.chat-window {
+    position: fixed;
+    bottom: 120px;
+    right: 30px;
+
+    width: 380px;
+    height: 600px;
+
+    background: #172547;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    display: none;
+
+    flex-direction: column;
+
+    border: 1px solid #2c4f87;
+
+    box-shadow: 0 20px 45px rgba(0,0,0,.4);
+
+    z-index: 1000;
+}
+
+/* Header*/
+
+.chat-header{
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:18px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.chat-header h5{
+
+    margin:0;
+
+    font-weight:600;
+}
+
+.chat-header button{
+
+    background:none;
+
+    border:none;
+
+    color:white;
+
+    font-size:20px;
+
+    cursor:pointer;
+}
+
+/*chat body*/
+
+.chat-body{
+
+    flex:1;
+
+    padding:15px;
+
+    overflow-y:auto;
+
+    background:#0f172a;
+}
+
+/*suggestions*/
+
+.chat-suggestions{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    padding:15px;
+
+    border-top:1px solid #2c4f87;
+}
+
+.suggestion-btn{
+
+    background:#2563eb;
+
+    color:white;
+
+    border:none;
+
+    border-radius:20px;
+
+    padding:8px 14px;
+
+    cursor:pointer;
+
+    font-size:14px;
+}
+
+.suggestion-btn:hover{
+
+    background:#3b82f6;
+}
+
+/*footer*/
+.chat-footer{
+
+    display:flex;
+
+    padding:15px;
+
+    gap:10px;
+
+    border-top:1px solid #2c4f87;
+}
+
+/*input*/
+
+.chat-footer input{
+
+    flex:1;
+
+    background:#1e293b;
+
+    border:none;
+
+    outline:none;
+
+    color:white;
+
+    padding:12px;
+
+    border-radius:10px;
+}
+
+/*send button*/
+
+.chat-footer button{
+
+    width:50px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#2563eb;
+
+    color:white;
+
+    cursor:pointer;
+}
+
+     /*User Message*/
+     
+     .user-message {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 12px;
+}
+
+.user-message .message {
+    background: #2563eb;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 15px 15px 0 15px;
+    max-width: 75%;
+    white-space: pre-line;
+}
+
+    /*Bot message*/
+
+    .bot-message {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 12px;
+}
+
+.bot-message .message {
+    background: #1e293b;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 15px 15px 15px 0;
+    max-width: 75%;
+    white-space: pre-line;
+}
+
+    
+
+    </style>
+  </head>
+  <body>
+
+    <!--chatbot-->
+    <div class="chat-widget">
+        
+      <div class="chat-popup">
+        <h6>💬 Need Help?</h6>
+
+        <p>Ask me about events.</p>
+      </div>
+
+      <button class="chat-btn" id="openChat">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png"
+          alt="AI Bot"
+        />
+      </button>
+    </div>
+ 
+    <div class="chat-window" id="chatWindow">
+
+    <!-- Header -->
+    <div class="chat-header">
+
+        <h5>Seed bot</h5>
+
+        <button id="closeChat">
+            <i class="bi bi-x-lg"></i>
+        </button>
+
+    </div>
+
+    <!-- Chat Body -->
+    <div class="chat-body" id="chatBody">
+
+    </div>
+
+    <!-- Suggested Questions -->
+
+    <div class="chat-suggestions">
+
+        <button class="suggestion-btn">
+            Tech Events
+        </button>
+
+        <button class="suggestion-btn">
+            Workshops
+        </button>
+
+        <button class="suggestion-btn">
+            Music
+        </button>
+
+        <button class="suggestion-btn">
+            Weekend
+        </button>
+
+    </div>
+
+    <!-- Footer -->
+
+    <div class="chat-footer">
+
+        <input
+            type="text"
+            id="userInput"
+            placeholder="Ask something..."
+        >
+
+        <button id="sendBtn">
+
+            <i class="bi bi-send-fill"></i>
+
+        </button>
+
+    </div>
+
+</div>
+    
+    <script>
+
+        const chatbotResponses = [
+
+{
+    keywords: ["hello", "hi", "hey"],
+    response: "👋 Hello! Welcome to Seed. How can I help you today?"
+},
+
+{
+    keywords: ["tech", "technology", "coding", "developer"],
+    response: `💻 Upcoming Tech Events
+
+• AI Workshop
+• Web Development Bootcamp
+• Flutter Meetup
+• Cyber Security Seminar
+
+Visit the Events page to register.`
+},
+
+{
+    keywords: ["music", "concert", "dj", "band"],
+    response: `🎵 Music Events
+
+• Live Concert
+• EDM Night
+• Guitar Workshop
+• Indie Band Performance`
+},
+
+{
+    keywords: ["sports", "game", "tournament"],
+    response: `🏆 Sports Events
+
+• Cricket Tournament
+• Football League
+• Marathon
+• Badminton Championship`
+},
+
+{
+    keywords: ["workshop", "training", "session"],
+    response: `🛠 Upcoming Workshops
+
+• UI/UX Design
+• Artificial Intelligence
+• Cloud Computing
+• Resume Building
+• Public Speaking`
+},
+
+{
+    keywords: ["weekend", "saturday", "sunday"],
+    response: `📅 Weekend Events
+
+Saturday
+• AI Workshop
+• Coding Contest
+
+Sunday
+• Music Festival
+• Photography Walk`
+},
+
+{
+    keywords: ["hackathon", "coding competition", "buildathon"],
+    response: `💡 Upcoming Hackathons
+
+• Buildathon 2026
+• CodeSprint
+• InnovateX
+• Smart India Hack Challenge`
+},
+
+{
+    keywords: ["register", "registration", "join", "book"],
+    response: `📝 To register:
+
+1. Open the Events page.
+2. Select your event.
+3. Click "Register Now".
+4. Fill in your details.
+5. Confirm your registration.`
+},
+
+{
+    keywords: ["free", "price", "fees", "cost", "paid"],
+    response: `💰 Event Pricing
+
+• Many community events are FREE.
+• Premium workshops may require registration fees.
+• Check the event details for exact pricing.`
+},
+
+{
+    keywords: ["location", "venue", "address", "where"],
+    response: `📍 Event venues are displayed on every event page.
+
+You can also open the location directly in Google Maps from the event details.`
+},
+
+{
+    keywords: ["food", "snacks", "lunch", "refreshments"],
+    response: `🍕 Food Information
+
+Some events provide:
+• Lunch
+• Snacks
+• Tea/Coffee
+
+Please check the event description for details.`
+},
+
+{
+    keywords: ["certificate", "certificates"],
+    response: `🏅 Yes! Many workshops, hackathons, and bootcamps provide participation certificates after successful attendance.`
+},
+
+{
+    keywords: ["networking", "meet", "community"],
+    response: `🤝 Networking Events
+
+Meet:
+• Developers
+• Founders
+• Designers
+• Students
+• Recruiters
+
+Great opportunity to build your professional network!`
+},
+
+{
+    keywords: ["contact", "support", "help"],
+    response: `📞 Need Help?
+
+Email: support@seed.com
+Phone: +91 98765 43210
+
+Our support team will be happy to assist you.`
+},
+
+{
+    keywords: ["bye", "goodbye", "see you"],
+    response: "👋 Thank you for visiting Seed! Have a wonderful day. See you at our next event! 😊"
+
+}
+
+];
+
+
+
+
+// chatBot.js
+
+const openChatBtn = document.getElementById("openChat");
+const closeChatBtn = document.getElementById("closeChat");
+
+const chatWindow = document.getElementById("chatWindow");
+const chatPopup = document.querySelector(".chat-popup");
+
+const chatBody = document.getElementById("chatBody");
+
+const userInput = document.getElementById("userInput");
+
+const sendBtn = document.getElementById("sendBtn");
+
+// open chat
+
+openChatBtn.addEventListener("click", () => {
+
+    chatWindow.style.display = "flex";
+
+    chatPopup.style.display = "none";
+
+});
+
+// close chat
+
+closeChatBtn.addEventListener("click", () => {
+
+    chatWindow.style.display = "none";
+
+    chatPopup.style.display = "block";
+
+});
+
+// add message
+function addMessage(message, sender) {
+
+    const messageDiv = document.createElement("div");
+
+    messageDiv.className = `${sender}-message`;
+
+    messageDiv.innerHTML = `
+        <div class="message">
+            ${message}
+        </div>
+    `;
+
+    chatBody.appendChild(messageDiv);
+
+    // Auto Scroll
+    chatBody.scrollTop = chatBody.scrollHeight;
+
+}
+addMessage("👋 Hello! Welcome to Seed.", "bot");
+
+
+// bot response 
+
+function getBotResponse(userMessage){
+
+    userMessage = userMessage.toLowerCase();
+
+    for (let item of chatbotResponses) {
+        for (let keyword of item.keywords){
+            if(userMessage.includes(keyword)){
+                return item.response;
+}
+
+}
+
+}
+return `😅 Sorry, I couldn't understand that
+
+Try asking:
+
+• Tech Events
+• Workshops
+• Music Events
+• Weekend Events`;
+}
+
+function sendMessage(){
+    const message = userInput.value.trim();
+
+    if(message==="")
+       return ;
+
+       addMessage(message,'user');
+
+  const botResponse = getBotResponse(message);
+    addMessage(botResponse,'bot');  
+    
+    userInput.value="";
+
+}
+
+
+sendBtn.addEventListener("click",sendMessage);
+
+userInput.addEventListener("keydown",(event)=>{
+    if(event.key=="Enter")
+          sendMessage();
+});
+
+    </script>
+  </body>
+</html>

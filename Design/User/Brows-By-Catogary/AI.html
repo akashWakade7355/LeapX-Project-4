@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI</title>
+    <!-- Bootstrap -->
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons -->
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+
+    <style>
+      body {
+        background: #0f1117;
+        color: white;
+        font-family: "Poppins", sans-serif;
+      }
+      /*==================================
+Google Font
+==================================*/
+
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+      /*==================================
+        Floating Chat Widget
+===================================*/
+
+      .chat-widget {
+        position: fixed;
+
+        bottom: 30px;
+
+        right: 30px;
+
+        display: flex;
+
+        align-items: flex-end;
+
+        gap: 15px;
+
+        z-index: 999;
+      }
+
+      /* Chat Popup */
+
+      .chat-popup {
+        background: linear-gradient(180deg, #172547, #101b34);
+
+        border: 1px solid #2c4f87;
+
+        padding: 18px 22px;
+
+        border-radius: 18px;
+
+        color: white;
+
+        width: 230px;
+
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .chat-popup h6 {
+        color: #60a5fa;
+
+        font-weight: 700;
+
+        margin-bottom: 8px;
+      }
+
+      .chat-popup p {
+        color: #b8cae6;
+
+        margin: 0;
+
+        font-size: 0.95rem;
+      }
+
+      /* Chat Button */
+
+      .chat-btn {
+        width: 72px;
+
+        height: 72px;
+
+        border: none;
+
+        border-radius: 50%;
+
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        cursor: pointer;
+
+        box-shadow: 0 12px 35px rgba(37, 99, 235, 0.45);
+
+        transition: 0.3s;
+
+        overflow: hidden;
+      }
+
+      .chat-btn img {
+        width: 60px;
+
+        height: 60px;
+
+        object-fit: contain;
+      }
+
+      .chat-btn:hover {
+        transform: scale(1.08);
+
+        box-shadow: 0 20px 45px rgba(37, 99, 235, 0.55);
+      }
+      /* Floating Animation */
+
+      @keyframes float {
+        0% {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(-8px);
+        }
+
+        100% {
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!--chatbot-->
+    <div class="chat-widget">
+      <div class="chat-popup">
+        <h6>💬 Need Help?</h6>
+
+        <p>Ask me about events.</p>
+      </div>
+
+      <button class="chat-btn">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png"
+          alt="AI Bot"
+        />
+      </button>
+    </div>
+  </body>
+</html>
