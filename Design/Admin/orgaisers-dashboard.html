@@ -622,7 +622,13 @@ Responsive
 
             <div class="footer-left">
 
+
                 <a href="#" class="footer-logo">
+            <button class="btn btn-primary me-3" id="createEventBtn">
+                <i class="bi bi-plus-circle"></i>
+                Create Event
+            </button>
+ (Completed admin pages)
 
                     <i class="bi bi-stars"></i>
 
@@ -1141,7 +1147,7 @@ View Details
 
 <a
 
-href="manage-event.html"
+href="manage-events.html"
 
 class="btn btn-primary">
 
@@ -1236,7 +1242,7 @@ View Details
 
 <a
 
-href="manage-event.html"
+href="manage-events.html"
 
 class="btn btn-primary">
 
@@ -1264,337 +1270,305 @@ Manage Event
 
 <!-- Bootstrap -->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // =========================================================
+  // CONSTANTS
+  // =========================================================
+  const STORAGE_KEY = "events";
+  const STATUS = { PENDING: "Pending", GOING: "Going" };
+  const DEFAULT_BANNER_IMAGE =
+    "https://images.unsplash.com/photo-1511578314322-379afb476865?w=1200";
 
-<!-- JS -->
+  // NOTE: change this if your management page is actually named
+  // "event-management.html" instead of "manage-events.html".
+  const MANAGE_EVENT_URL = "manage-events.html";
+  const EVENT_DETAILS_URL = "event-details.html";
+  const CREATE_EVENT_URL = "createEvent.html";
 
+  // =========================================================
+  // DOM ELEMENT CACHE
+  // =========================================================
+  const dom = {
+    eventsContainer: document.getElementById("eventsContainer"),
+    totalEvents: document.getElementById("totalEvents"),
+    totalUsers: document.getElementById("totalUsers"),
+    pendingUsers: document.getElementById("pendingUsers"),
+    upcomingEvents: document.getElementById("upcomingEvents"),
+    searchInput: document.getElementById("searchInput"),
+    filterCategory: document.getElementById("filterCategory"),
+    createEventBtn: document.getElementById("createEventBtn"),
+  };
 
+  // Single source of truth, loaded once. All rendering derives from this.
+  let allEvents = [];
 
-<script >
-    let events = JSON.parse(localStorage.getItem("events")) || [];
+  // Combined filter state so search + visibility filter work together
+  // instead of overwriting each other.
+  let activeFilters = {
+    searchTerm: "",
+    visibility: "all",
+  };
 
-const event = {
-    id: Date.now(),
+  // =========================================================
+  // LOCALSTORAGE ACCESS
+  // All reads/writes to LocalStorage happen only through these two
+  // functions, so parsing logic never has to be duplicated elsewhere.
+  // =========================================================
 
-    title: eventName,
-    shortDescription: shortDescription,
-    description: description,
-
-    category: category,
-    visibility: visibility,
-
-    banner: bannerPreview.src,
-
-    date: startDate,
-    time: startTime,
-
-    location: location,
-
-    going: 0,
-    pending: 0,
-
-    attendees: []
-};
-
-events.push(event);
-
-localStorage.setItem("events", JSON.stringify(events));
-
-
-// =============================================
-// Elements
-// =============================================
-
-const eventsContainer = document.getElementById("eventsContainer");
-
-const totalEvents = document.getElementById("totalEvents");
-const totalUsers = document.getElementById("totalUsers");
-const pendingUsers = document.getElementById("pendingUsers");
-const upcomingEvents = document.getElementById("upcomingEvents");
-
-const searchInput = document.getElementById("searchInput");
-const filterCategory = document.getElementById("filterCategory");
-
-
-
-// =============================================
-// Load Events
-// =============================================
-
-let events = JSON.parse(localStorage.getItem("events")) || [];
-
-renderDashboard(events);
-
-
-
-// =============================================
-// Dashboard
-// =============================================
-
-function renderDashboard(data){
-
-    updateStatistics(data);
-
-    displayEvents(data);
-
-}
-
-
-
-// =============================================
-// Statistics
-// =============================================
-
-function updateStatistics(data){
-
-    totalEvents.textContent = data.length;
-
-    let going = 0;
-
-    let pending = 0;
-
-    data.forEach(event=>{
-
-        going += Number(event.going || 0);
-
-        pending += Number(event.pending || 0);
-
-    });
-
-    totalUsers.textContent = going;
-
-    pendingUsers.textContent = pending;
-
-    upcomingEvents.textContent = data.length;
-
-}
-
-
-
-// =============================================
-// Display Events
-// =============================================
-
-function displayEvents(data){
-
-    eventsContainer.innerHTML="";
-
-    if(data.length===0){
-
-        eventsContainer.innerHTML=`
-
-        <div class="col-12">
-
-            <div class="text-center py-5">
-
-                <h3>No Events Found</h3>
-
-                <p>Create your first event.</p>
-
-            </div>
-
-        </div>
-
-        `;
-
-        return;
-
+  function getEvents() {
+    try {
+      const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+      console.error("Failed to parse events from LocalStorage:", error);
+      return [];
     }
-
-    data.forEach(event=>{
-
-        eventsContainer.innerHTML+=`
-
-        <div class="col-lg-4 col-md-6">
-
-            <div class="event-card">
-
-                <img
-                    src="${event.banner}"
-                    class="event-banner">
-
-                <div class="event-body">
-
-                    <span class="badge bg-primary">
-
-                        ${event.category}
-
-                    </span>
-
-                    <h4>
-
-                        ${event.title}
-
-                    </h4>
-
-                    <div class="event-info">
-
-                        <p>
-
-                            <i class="bi bi-calendar3"></i>
-
-                            ${event.date}
-
-                        </p>
-
-                        <p>
-
-                            <i class="bi bi-geo-alt"></i>
-
-                            ${event.location}
-
-                        </p>
-
-                        <p>
-
-                            <i class="bi bi-globe"></i>
-
-                            ${event.visibility}
-
-                        </p>
-
-                    </div>
-
-                    <div class="status">
-
-                        <span>
-
-                            👥 ${event.going} Going
-
-                        </span>
-
-                        <span>
-
-                            ⏳ ${event.pending} Pending
-
-                        </span>
-
-                    </div>
-
-                    <div class="d-grid gap-2 mt-4">
-
-                        <a href="event-details.html?id=${event.id}"
-
-                        class="btn btn-outline-light">
-
-                        View Details
-
-                        </a>
-
-                        <a href="manage-event.html?id=${event.id}"
-
-                        class="btn btn-primary">
-
-                        Manage Event
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        `;
-
-    });
-
-}
-
-
-
-// =============================================
-// Search
-// =============================================
-
-searchInput.addEventListener("keyup",()=>{
-
-    const keyword=searchInput.value.toLowerCase();
-
-    const filtered=events.filter(event=>{
-
-        return event.title.toLowerCase().includes(keyword);
-
-    });
-
-    renderDashboard(filtered);
-
-});
-
-
-
-// =============================================
-// Filter
-// =============================================
-
-filterCategory.addEventListener("change",()=>{
-
-    const value=filterCategory.value;
-
-    if(value==="all"){
-
-        renderDashboard(events);
-
-        return;
-
-    }
-
-    const filtered=events.filter(event=>{
-
-        return event.visibility===value;
-
-    });
-
-    renderDashboard(filtered);
-
-});
-
-
-
-// =============================================
-// Create Event Button
-// =============================================
-
-document.getElementById("createEventBtn").addEventListener("click",()=>{
-
-    window.location.href="create-event.html";
-
-});
-
-[
-  {
-    id: 1752132123,
-
-    title: "AI Workshop",
-
-    shortDescription: "Learn AI",
-
-    description: "Full description",
-
-    category: "Technology",
-
-    visibility: "Public",
-
-    banner: "data:image/png;base64,...",
-
-    date: "2026-07-15",
-
-    time: "10:00",
-
-    location: "Bengaluru",
-
-    going: 0,
-
-    pending: 0,
-
-    attendees: []
   }
-]
 
+  function saveEvents(eventList) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(eventList));
+  }
+
+  // =========================================================
+  // UTILITY HELPERS
+  // =========================================================
+
+  function countAttendeesByStatus(event, status) {
+    return (event?.attendees ?? []).filter((a) => a?.status === status).length;
+  }
+
+  function resolveImage(url) {
+    return url && url.trim() !== "" ? url : DEFAULT_BANNER_IMAGE;
+  }
+
+  function escapeHtml(value) {
+    const div = document.createElement("div");
+    div.textContent = value ?? "";
+    return div.innerHTML;
+  }
+
+  /** True if the event's startDate is today or in the future. */
+  function isUpcoming(event) {
+    if (!event?.startDate) return false;
+    const eventDate = new Date(event.startDate);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return !isNaN(eventDate) && eventDate >= today;
+  }
+
+  // =========================================================
+  // INIT
+  // =========================================================
+
+  function initDashboard() {
+    allEvents = getEvents();
+    renderDashboard(allEvents);
+    attachStaticEventListeners();
+  }
+
+  // =========================================================
+  // RENDER: Orchestrator
+  // Every mutation (search, filter, delete) funnels through here
+  // so stats and cards can never fall out of sync.
+  // =========================================================
+
+  function renderDashboard(eventList) {
+    updateStatistics(eventList);
+    renderEventCards(eventList);
+  }
+
+  // =========================================================
+  // RENDER: Statistics
+  // =========================================================
+
+  function updateStatistics(eventList) {
+    let totalGoing = 0;
+    let totalPending = 0;
+    let upcomingCount = 0;
+
+    eventList.forEach((event) => {
+      totalGoing += countAttendeesByStatus(event, STATUS.GOING);
+      totalPending += countAttendeesByStatus(event, STATUS.PENDING);
+      if (isUpcoming(event)) upcomingCount += 1;
+    });
+
+    dom.totalEvents.textContent = eventList.length;
+    dom.totalUsers.textContent = totalGoing;
+    dom.pendingUsers.textContent = totalPending;
+    dom.upcomingEvents.textContent = upcomingCount;
+  }
+
+  // =========================================================
+  // RENDER: Event Cards
+  // =========================================================
+
+  function renderEventCards(eventList) {
+    if (eventList.length === 0) {
+      dom.eventsContainer.innerHTML = `
+        <div class="col-12">
+          <div class="text-center py-5">
+            <h3>No events created yet</h3>
+            <p>Create your first event to see it here.</p>
+          </div>
+        </div>
+      `;
+      return;
+    }
+
+    dom.eventsContainer.innerHTML = eventList.map(createEventCard).join("");
+  }
+
+  /** Builds the HTML for a single event card. */
+  function createEventCard(event) {
+    const going = countAttendeesByStatus(event, STATUS.GOING);
+    const pending = countAttendeesByStatus(event, STATUS.PENDING);
+    const eventId = escapeHtml(event?.id ?? "");
+
+    return `
+      <div class="col-lg-4 col-md-6">
+        <div class="event-card" data-event-id="${eventId}" role="button">
+          <img src="${resolveImage(event.bannerImage)}"
+               class="event-banner"
+               onerror="this.src='${DEFAULT_BANNER_IMAGE}'">
+          <div class="event-body">
+            <span class="badge bg-primary">${escapeHtml(event.category || "Uncategorized")}</span>
+            <h4>${escapeHtml(event.title || "Untitled Event")}</h4>
+            <div class="event-info">
+              <p><i class="bi bi-calendar3"></i> ${escapeHtml(event.startDate || "Date TBD")}</p>
+              <p><i class="bi bi-clock"></i> ${escapeHtml(event.startTime || "Time TBD")}</p>
+              <p><i class="bi bi-geo-alt"></i> ${escapeHtml(event.location || "Location TBD")}</p>
+              <p><i class="bi bi-globe"></i> ${escapeHtml(event.visibility || "Public")}</p>
+            </div>
+            <div class="status">
+              <span>👥 ${going} Going</span>
+              <span>⏳ ${pending} Pending</span>
+            </div>
+            <div class="d-grid gap-2 mt-4">
+              <a href="${EVENT_DETAILS_URL}?id=${eventId}" class="btn btn-outline-light">
+                View Details
+              </a>
+              <a href="${MANAGE_EVENT_URL}?id=${eventId}" class="btn btn-primary">
+                Manage Event
+              </a>
+              <div class="d-flex gap-2">
+                <button class="btn btn-outline-light w-50" data-action="edit" data-id="${eventId}">
+                  <i class="bi bi-pencil-square"></i> Edit
+                </button>
+                <button class="btn btn-danger w-50" data-action="delete" data-id="${eventId}">
+                  <i class="bi bi-trash3"></i> Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // =========================================================
+  // SEARCH & FILTER
+  // Both read/write the same activeFilters object and both
+  // funnel through applyFilters(), so neither one overwrites
+  // the other's results.
+  // =========================================================
+
+  function searchEvents(eventList, searchTerm) {
+    if (!searchTerm) return eventList;
+    const keyword = searchTerm.trim().toLowerCase();
+    return eventList.filter((event) =>
+      (event.title || "").toLowerCase().includes(keyword)
+    );
+  }
+
+  function filterEvents(eventList, visibility) {
+    if (!visibility || visibility === "all") return eventList;
+    return eventList.filter((event) => event.visibility === visibility);
+  }
+
+  function applyFilters() {
+    let result = allEvents;
+    result = searchEvents(result, activeFilters.searchTerm);
+    result = filterEvents(result, activeFilters.visibility);
+    renderDashboard(result);
+  }
+
+  function handleSearchInput() {
+    activeFilters.searchTerm = dom.searchInput.value;
+    applyFilters();
+  }
+
+  function handleFilterChange() {
+    activeFilters.visibility = dom.filterCategory.value;
+    applyFilters();
+  }
+
+  // =========================================================
+  // CARD ACTIONS: open, edit, delete
+  // =========================================================
+
+  function openEvent(eventId) {
+    window.location.href = `${MANAGE_EVENT_URL}?id=${encodeURIComponent(eventId)}`;
+  }
+
+  function editEvent(eventId) {
+    window.location.href = `${CREATE_EVENT_URL}?id=${encodeURIComponent(eventId)}`;
+  }
+
+  function deleteEvent(eventId) {
+    const confirmed = confirm("Are you sure you want to delete this event? This cannot be undone.");
+    if (!confirmed) return;
+
+    // Remove only the first matching event by index, so duplicate
+    // IDs (bad data) can't cause every matching event to vanish at once.
+    const indexToRemove = allEvents.findIndex(
+      (event) => String(event.id) === String(eventId)
+    );
+    if (indexToRemove === -1) return;
+
+    allEvents.splice(indexToRemove, 1);
+    saveEvents(allEvents);
+    applyFilters();
+  }
+
+  // =========================================================
+  // EVENT LISTENERS
+  // =========================================================
+
+  function attachStaticEventListeners() {
+    dom.searchInput?.addEventListener("keyup", handleSearchInput);
+    dom.filterCategory?.addEventListener("change", handleFilterChange);
+    dom.createEventBtn?.addEventListener("click", () => {
+      window.location.href = CREATE_EVENT_URL;
+    });
+
+    // Single delegated listener handles clicks on every card,
+    // including ones re-rendered after search/filter/delete.
+    dom.eventsContainer.addEventListener("click", handleCardContainerClick);
+  }
+
+  function handleCardContainerClick(clickEvent) {
+    const actionButton = clickEvent.target.closest("button[data-action]");
+    if (actionButton) {
+      const { action, id } = actionButton.dataset;
+      if (action === "edit") editEvent(id);
+      else if (action === "delete") deleteEvent(id);
+      return;
+    }
+
+    // Ignore clicks on the "View Details" / "Manage Event" links —
+    // they already navigate on their own via href.
+    if (clickEvent.target.closest("a")) return;
+
+    // Otherwise, treat it as a click on the card itself.
+    const card = clickEvent.target.closest(".event-card");
+    if (card) openEvent(card.dataset.eventId);
+  }
+
+  // =========================================================
+  // ENTRY POINT
+  // =========================================================
+  initDashboard();
 </script>
-
 </body>
 
 </html>
