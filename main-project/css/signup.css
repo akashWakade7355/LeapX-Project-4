@@ -1,0 +1,429 @@
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:#0d1117;
+    color:#fff;
+    overflow-x:hidden;
+    position:relative;
+}
+
+/* ==========================================
+   Background
+========================================== */
+
+.background-overlay{
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(circle at top left,#1d4ed840,transparent 35%),
+    radial-gradient(circle at bottom right,#2563eb35,transparent 30%),
+    linear-gradient(135deg,#0d1117,#111827,#0d1117);
+    z-index:-2;
+}
+
+body::before,
+body::after{
+    content:"";
+    position:fixed;
+    border-radius:50%;
+    filter:blur(100px);
+    z-index:-1;
+}
+
+body::before{
+    width:300px;
+    height:300px;
+    background:#2563eb55;
+    top:-80px;
+    left:-80px;
+}
+
+body::after{
+    width:320px;
+    height:320px;
+    background:#06b6d455;
+    bottom:-100px;
+    right:-100px;
+}
+
+/* ==========================================
+   Navbar
+========================================== */
+
+.navbar{
+    background:#151923;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.navbar-brand{
+    color:#fff !important;
+    font-weight:700;
+}
+
+.btn-outline-light{
+    border-radius:12px;
+    transition:.3s;
+}
+
+.btn-outline-light:hover{
+    background:#22c1ee;
+    border-color:#22c1ee;
+    color:#000;
+}
+
+/* ==========================================
+   Signup Section
+========================================== */
+
+.signup-section{
+    min-height:calc(100vh - 90px);
+    display:flex;
+    align-items:center;
+    padding:60px 0;
+}
+
+/* ==========================================
+   Signup Card
+========================================== */
+
+.signup-card{
+
+    background:rgba(25,32,48,.78);
+    backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:24px;
+    padding:45px;
+    box-shadow:0 15px 45px rgba(0,0,0,.4);
+    transition:.35s;
+
+}
+
+.signup-card:hover{
+
+    transform:translateY(-5px);
+    box-shadow:0 20px 60px rgba(34,193,238,.2);
+
+}
+
+/* ==========================================
+   Icon
+========================================== */
+
+.signup-icon{
+
+    width:60px;
+    height:60px;
+    margin:auto;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#1f3b70;
+    border:1px solid #2c6bff;
+
+}
+
+.signup-icon i{
+
+    font-size:30px;
+    color:#22c1ee;
+
+}
+
+/* ==========================================
+   Heading
+========================================== */
+
+h2{
+
+    font-weight:600;
+    color:#fff;
+
+}
+
+p{
+
+    color:#b9c3d8;
+
+}
+
+/* ==========================================
+   Labels
+========================================== */
+
+.form-label{
+
+    color:#dce3ef;
+    font-weight:600;
+
+}
+
+/* ==========================================
+   Inputs
+========================================== */
+
+.form-control{
+
+    height:55px;
+    background:#1b2435;
+    color:#fff;
+    border:none;
+    border-radius:12px;
+
+}
+
+.form-control::placeholder{
+
+    color:#7f8aa5;
+
+}
+
+.form-control:focus{
+
+    background:#1b2435;
+    color:#fff;
+    box-shadow:0 0 0 .25rem rgba(34,193,238,.2);
+
+}
+
+/* ==========================================
+   Password Button
+========================================== */
+
+.password-btn{
+
+    background:#1b2435;
+    color:#9cb2d6;
+    border:none;
+    border-radius:0 12px 12px 0;
+
+}
+
+.password-btn:hover{
+
+    background:#24314b;
+    color:#22c1ee;
+
+}
+
+/* ==========================================
+   Password Strength
+========================================== */
+
+.progress{
+
+    height:8px;
+    margin-top:10px;
+    background:#2b364d;
+    border-radius:50px;
+    overflow:hidden;
+
+}
+
+.progress-bar{
+
+    width:0%;
+    transition:.4s;
+
+}
+
+#strengthText{
+
+    display:block;
+    margin-top:8px;
+    font-size:14px;
+    color:#b8c1d6;
+
+}
+
+/* ==========================================
+   Checkbox
+========================================== */
+
+.form-check-input{
+
+    background:#202838;
+    border-color:#3b82f6;
+
+}
+
+.form-check-input:checked{
+
+    background:#22c1ee;
+    border-color:#22c1ee;
+
+}
+
+.form-check-label{
+
+    color:#cfd6e4;
+
+}
+
+/* ==========================================
+   Button
+========================================== */
+
+.signup-btn{
+
+    height:55px;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(135deg,#1da1f2,#22d3ee);
+    color:#000;
+    font-size:17px;
+    font-weight:700;
+    transition:.35s;
+
+}
+
+.signup-btn:hover{
+
+    transform:translateY(-2px);
+    box-shadow:0 10px 25px rgba(34,193,238,.45);
+
+}
+
+/* ==========================================
+   Login Link
+========================================== */
+
+.signup-link{
+
+    color:#22c1ee;
+    font-weight:600;
+    text-decoration:none;
+
+}
+
+.signup-link:hover{
+
+    color:#67dcff;
+
+}
+
+/* ==========================================
+   Error
+========================================== */
+
+.error{
+
+    color:#ff6b81;
+    display:block;
+    margin-top:6px;
+    font-size:13px;
+
+}
+
+/* ==========================================
+   Spinner
+========================================== */
+
+.spinner-border{
+
+    width:18px;
+    height:18px;
+
+}
+
+/* ==========================================
+   Animation
+========================================== */
+
+.signup-card{
+
+    animation:fadeIn .8s ease;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media(max-width:992px){
+
+.signup-card{
+
+    padding:35px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.signup-card{
+
+    padding:30px;
+
+}
+
+}
+
+@media(max-width:576px){
+
+.signup-section{
+
+    padding:30px 15px;
+
+}
+
+.signup-card{
+
+    padding:25px;
+    border-radius:20px;
+
+}
+
+.signup-icon{
+
+    width:75px;
+    height:75px;
+
+}
+
+.signup-icon i{
+
+    font-size:34px;
+
+}
+
+.form-control{
+
+    height:50px;
+
+}
+
+.signup-btn{
+
+    height:50px;
+
+}
+
+}

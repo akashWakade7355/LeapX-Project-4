@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>homepage</title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+     <!-- Bootstrap Icons -->
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+        <link rel="stylesheet" href="../css/homePage.css">
+        <link rel="stylesheet" href="../../chatbot/chatbot.css">
+        <style>
+            /*==========================
+Search Section
+===========================*/
+
+.search-section{
+
+    padding:90px 0;
+
+    background:#0d111c;
+
+}
+
+.search-container{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    text-align:center;
+
+}
+
+.search-container h2{
+
+    font-size:48px;
+
+    font-weight:700;
+
+    color:#fff;
+
+}
+
+.search-container p{
+
+    color:#9fb0d1;
+
+    margin:15px 0 45px;
+
+    font-size:18px;
+
+}
+
+.search-box{
+
+    background:#182544;
+
+    border:1px solid #2b4d8d;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    display:flex;
+
+    gap:18px;
+
+    align-items:center;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
+
+}
+
+.search-input{
+
+    flex:2;
+
+    display:flex;
+
+    align-items:center;
+
+    background:#101b34;
+
+    border-radius:12px;
+
+    padding:0 15px;
+
+}
+
+.search-input i{
+
+    color:#60a5fa;
+
+    font-size:20px;
+
+}
+
+.search-input input{
+
+    flex:1;
+
+    background:none;
+
+    border:none;
+
+    outline:none;
+
+    color:white;
+
+    padding:15px;
+
+    font-size:16px;
+
+}
+
+.search-input input::placeholder{
+
+    color:#8899b8;
+
+}
+
+.search-box select{
+
+    flex:1;
+
+    background:#101b34;
+
+    color:white;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:12px;
+
+    padding:15px;
+
+    cursor:pointer;
+
+}
+
+.search-box button{
+
+    background:#1da1f2;
+
+    color:white;
+
+    border:none;
+
+    padding:15px 30px;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.search-box button:hover{
+
+    background:#2496ed;
+
+    transform:translateY(-2px);
+
+}
+        </style>
+</head>
+<body>
+    <!--=========================
+        Modern header
+==========================-->
+
+<header class="modern-footer">
+
+    <div class="container-fluid px-5">
+
+        <div class="footer-wrapper">
+
+            <!-- Left -->
+
+            <div class="footer-left">
+
+                <a class="navbar-brand fw-bold fs-3" href="../../html/index.html">
+          <i class="bi bi-calendar-event-fill text-info"></i>
+          Seed
+        </a>
+
+
+                <a href="./registeredEvents-upcomming.html">
+                    <i class="bi bi-calendar-event"></i>
+                    Registered Events
+                </a>
+
+                <a href="./homepage.html" class="active">
+
+                         <i class="bi bi-compass"></i>
+
+                    Discover
+
+                </a>
+                 <a href="../Admin/orgaisers-dashboard.html">
+                    <i class="bi bi-calendar-event"></i>
+                    host
+                </a>
+
+            </div>
+
+            
+                
+            <div class="footer-right">
+
+                <a href="../Admin/createEvent.html">
+                    <button class="create-btn">
+
+                    Create Event
+
+                </button>
+
+                </a>
+                
+             
+
+                <button class="footer-icon notification">
+
+                    <i class="bi bi-bell"></i>
+
+                    <span></span>
+
+                </button>
+
+                <img
+                    src="https://i.pravatar.cc/100?img=15"
+                    class="footer-profile"
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+   <!-- Search area -->
+            <!-- Right -->
+
+               <section class="search-section">
+
+    <div class="search-container">
+
+        <h2>Find Your Next Event</h2>
+
+        <p>Search workshops, hackathons, meetups, concerts and more.</p>
+
+        <div class="search-box">
+
+            <!-- Search -->
+
+            <div class="search-input">
+
+                <i class="bi bi-search"></i>
+
+                <input
+                    type="text"
+                    placeholder="Search events..."
+                >
+
+            </div>
+
+            <!-- Category -->
+
+            <select>
+
+                <option>All Categories</option>
+                <option>Technology</option>
+                <option>Artificial Intelligence</option>
+                <option>Blockchain</option>
+                <option>Food & Drinks</option>
+                <option>Fitness</option>
+                <option>Arts & Culture</option>
+
+            </select>
+
+            <!-- Location -->
+
+            <select>
+
+                <option>All Locations</option>
+                <option>Bengaluru</option>
+                <option>Pune</option>
+                <option>Mumbai</option>
+                <option>Delhi</option>
+
+            </select>
+
+            <button>
+
+                <i class="bi bi-search"></i>
+                Search
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--=========================
+    Browse By Category
+==========================-->
+
+<section class="category-section">
+
+    <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center mb-5">
+
+            <div>
+                <h2 class="category-title">Browse by Category</h2>
+                <p class="category-subtitle">
+                    Find events based on your interests.
+                </p>
+            </div>
+
+            <a href="#" class="view-all">
+                View All →
+            </a>
+
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Technology -->
+            <div class="col-lg-4 col-md-6">
+                <a href="./Brows-By-Catogary/Tech.html" class="category-link">
+                    <div class="category-card">
+                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=300"
+                            class="category-img" alt="">
+                        <div>
+                            <h4>Technology</h4>
+                            <p>3,240 Events</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Food -->
+            <div class="col-lg-4 col-md-6">
+                <a href="#" class="category-link">
+                    <div class="category-card">
+                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300"
+                            class="category-img" alt="">
+                        <div>
+                            <h4>Food & Drinks</h4>
+                            <p>424 Events</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- AI -->
+            <div class="col-lg-4 col-md-6">
+                <a href="#" class="category-link">
+                    <div class="category-card">
+                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=300"
+                            class="category-img" alt="">
+                        <div>
+                            <h4>Artificial Intelligence</h4>
+                            <p>3,012 Events</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Arts -->
+            <div class="col-lg-4 col-md-6">
+                <a href="#" class="category-link">
+                    <div class="category-card">
+                        <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=300"
+                            class="category-img" alt="">
+                        <div>
+                            <h4>Arts & Culture</h4>
+                            <p>2,150 Events</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Blockchain -->
+            <div class="col-lg-4 col-md-6">
+                <a href="#" class="category-link">
+                    <div class="category-card">
+                        <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=300"
+                            class="category-img" alt="">
+                        <div>
+                            <h4>Blockchain</h4>
+                            <p>660 Events</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Fitness -->
+            <div class="col-lg-4 col-md-6">
+                <a href="#" class="category-link">
+                    <div class="category-card">
+                        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=300"
+                            class="category-img" alt="">
+                        <div>
+                            <h4>Fitness</h4>
+                            <p>2,020 Events</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Wellness -->
+            <div class="col-lg-4 col-md-6">
+                <a href="#" class="category-link">
+                    <div class="category-card">
+                        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=300"
+                            class="category-img" alt="">
+                        <div>
+                            <h4>Wellness</h4>
+                            <p>1,120 Events</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Crypto -->
+            <div class="col-lg-4 col-md-6">
+                <a href="#" class="category-link">
+                    <div class="category-card">
+                        <img src="https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=300"
+                            class="category-img" alt="">
+                        <div>
+                            <h4>Crypto</h4>
+                            <p>497 Events</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Startups -->
+            <div class="col-lg-4 col-md-6">
+                <a href="#" class="category-link">
+                    <div class="category-card">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=300"
+                            class="category-img" alt="">
+                        <div>
+                            <h4>Startups</h4>
+                            <p>845 Events</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--=========================
+      Browse by Location
+==========================-->
+
+<section class="location-section">
+
+    <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <div>
+
+                <h2 class="location-title">
+                    📍 Browse Events by Location
+                </h2>
+
+                <p class="location-subtitle">
+                    Discover exciting events happening near you.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- Tabs -->
+
+        <div class="location-tabs">
+
+            <button class="active">India</button>
+            <button>USA</button>
+            <button>Europe</button>
+            <button>Asia</button>
+            <button>Middle East</button>
+            <button>Australia</button>
+
+        </div>
+
+        <!-- Cities -->
+
+        <div class="row mt-5 g-4">
+
+            <a href="./Brows-By-Location/Banglore.html" style="text-decoration: none;">
+                 <div class="col-lg-3 col-md-6">
+
+                <div class="city-card">
+
+                    <img src="https://flagcdn.com/w40/in.png">
+
+                    <div>
+
+                        <h5>Bengaluru</h5>
+
+                        <p>245 Events</p>
+
+                    </div>
+
+                </div>
+            </a>
+           
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="city-card">
+
+                    <img src="https://flagcdn.com/w40/in.png">
+
+                    <div>
+
+                        <h5>Mumbai</h5>
+
+                        <p>180 Events</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="city-card">
+
+                    <img src="https://flagcdn.com/w40/in.png">
+
+                    <div>
+
+                        <h5>Delhi</h5>
+
+                        <p>165 Events</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="city-card">
+
+                    <img src="https://flagcdn.com/w40/in.png">
+
+                    <div>
+
+                        <h5>Hyderabad</h5>
+
+                        <p>140 Events</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="city-card">
+
+                    <img src="https://flagcdn.com/w40/in.png">
+
+                    <div>
+
+                        <h5>Pune</h5>
+
+                        <p>128 Events</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="city-card">
+
+                    <img src="https://flagcdn.com/w40/in.png">
+
+                    <div>
+
+                        <h5>Chennai</h5>
+
+                        <p>116 Events</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="city-card">
+
+                    <img src="https://flagcdn.com/w40/in.png">
+
+                    <div>
+
+                        <h5>Kolkata</h5>
+
+                        <p>95 Events</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="city-card">
+
+                    <img src="https://flagcdn.com/w40/in.png">
+
+                    <div>
+
+                        <h5>Goa</h5>
+
+                        <p>58 Events</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+    <!--chatbot-->
+    <div class="chat-widget">
+        
+      <div class="chat-popup">
+        <h6>💬 Need Help?</h6>
+
+        <p>Ask me about events.</p>
+      </div>
+
+      <button class="chat-btn" id="openChat">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png"
+          alt="AI Bot"
+        />
+      </button>
+    </div>
+ 
+    <div class="chat-window" id="chatWindow">
+
+    <!-- Header -->
+    <div class="chat-header">
+
+        <h5>Seed bot</h5>
+
+        <button id="closeChat">
+            <i class="bi bi-x-lg"></i>
+        </button>
+
+    </div>
+
+    <!-- Chat Body -->
+    <div class="chat-body" id="chatBody">
+
+    </div>
+
+    <!-- Suggested Questions -->
+
+    <div class="chat-suggestions">
+
+        <button class="suggestion-btn">
+            Tech Events
+        </button>
+
+        <button class="suggestion-btn">
+            Workshops
+        </button>
+
+        <button class="suggestion-btn">
+            Music
+        </button>
+
+        <button class="suggestion-btn">
+            Weekend
+        </button>
+
+    </div>
+
+    <!-- Footer -->
+
+    <div class="chat-footer">
+
+        <input
+            type="text"
+            id="userInput"
+            placeholder="Ask something..."
+        >
+
+        <button id="sendBtn">
+
+            <i class="bi bi-send-fill"></i>
+
+        </button>
+
+    </div>
+
+</div>
+<script src="../../chatbot/chatData.js"></script>
+<script src="../../chatbot/chatbot.js"></script>
+</body>
+</html>
