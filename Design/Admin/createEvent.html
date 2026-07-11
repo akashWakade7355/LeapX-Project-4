@@ -179,6 +179,42 @@ textarea.form-control{
     color:black;
 }
 
+/* Validation error styling (added) */
+.form-control.is-invalid,
+.form-select.is-invalid{
+    border-color:#EF4444;
+}
+
+.error-summary{
+    background:rgba(239,68,68,.1);
+    border:1px solid rgba(239,68,68,.4);
+    color:#FCA5A5;
+    border-radius:14px;
+    padding:16px 20px;
+    margin-bottom:22px;
+    display:none;
+}
+
+.error-summary ul{
+    margin:8px 0 0 20px;
+}
+
+/* Success banner (added) */
+.success-banner{
+    background:rgba(34,197,94,.1);
+    border:1px solid rgba(34,197,94,.4);
+    color:#86EFAC;
+    border-radius:14px;
+    padding:16px 20px;
+    margin-bottom:22px;
+    display:none;
+    font-weight:500;
+}
+
+.success-banner i{
+    margin-right:8px;
+}
+
 
 /*===============================
 Banner
@@ -382,8 +418,20 @@ text-align:center !important;
 
     </div>
 
+    <!-- Error summary box (added): lists all validation errors together -->
+    <div id="errorSummary" class="error-summary">
+        <strong><i class="bi bi-exclamation-triangle-fill"></i> Please fix the following:</strong>
+        <ul id="errorList"></ul>
+    </div>
 
-    <form id="createEventForm">
+    <!-- Success banner (added): replaces alert(), which some embedded/IDE
+         browser previews silently block, making the button look "broken" -->
+    <div id="successBanner" class="success-banner">
+        <i class="bi bi-check-circle-fill"></i>
+        <span id="successBannerText">Event Created Successfully! Redirecting to dashboard...</span>
+    </div>
+
+    <form id="createEventForm" novalidate>
 
 <div class="row g-4">
 
@@ -447,10 +495,11 @@ Basic Information
 
 <div class="mb-3">
 
-<label>Event Name</label>
+<label for="eventNameInput">Event Name</label>
 
 <input
 type="text"
+id="eventNameInput"
 class="form-control"
 placeholder="Enter event name">
 
@@ -458,10 +507,11 @@ placeholder="Enter event name">
 
 <div class="mb-3">
 
-<label>Short Description</label>
+<label for="shortDescriptionInput">Short Description</label>
 
 <input
 type="text"
+id="shortDescriptionInput"
 class="form-control"
 placeholder="One line summary">
 
@@ -469,9 +519,10 @@ placeholder="One line summary">
 
 <div class="mb-3">
 
-<label>Description</label>
+<label for="descriptionInput">Description</label>
 
 <textarea
+id="descriptionInput"
 rows="5"
 class="form-control"
 placeholder="Describe your event..."></textarea>
@@ -482,11 +533,11 @@ placeholder="Describe your event..."></textarea>
 
 <div class="col-md-6">
 
-<label>Category</label>
+<label for="categorySelect">Category</label>
 
-<select class="form-select">
+<select class="form-select" id="categorySelect">
 
-<option selected disabled>
+<option selected disabled value="">
 
 Choose Category
 
@@ -520,13 +571,13 @@ Choose Category
 
 <div class="col-md-6">
 
-<label>Visibility</label>
+<label for="visibilitySelect">Visibility</label>
 
-<select class="form-select">
+<select class="form-select" id="visibilitySelect">
 
-<option>Public</option>
+<option value="public">Public</option>
 
-<option>Private</option>
+<option value="private">Private</option>
 
 </select>
 
@@ -560,40 +611,44 @@ Date & Time
 
 <div class="col-md-3">
 
-<label>Start Date</label>
+<label for="startDateInput">Start Date</label>
 
 <input
 type="date"
+id="startDateInput"
 class="form-control">
 
 </div>
 
 <div class="col-md-3">
 
-<label>Start Time</label>
+<label for="startTimeInput">Start Time</label>
 
 <input
 type="time"
+id="startTimeInput"
 class="form-control">
 
 </div>
 
 <div class="col-md-3">
 
-<label>End Date</label>
+<label for="endDateInput">End Date</label>
 
 <input
 type="date"
+id="endDateInput"
 class="form-control">
 
 </div>
 
 <div class="col-md-3">
 
-<label>End Time</label>
+<label for="endTimeInput">End Time</label>
 
 <input
 type="time"
+id="endTimeInput"
 class="form-control">
 
 </div>
@@ -621,7 +676,7 @@ Location
 
 <div class="col-md-4">
 
-<label>Event Type</label>
+<label for="eventType">Event Type</label>
 
 <select
 class="form-select"
@@ -647,10 +702,11 @@ Online
 
 <div id="offlineLocation">
 
-<label>Location</label>
+<label for="venueInput">Location</label>
 
 <input
 type="text"
+id="venueInput"
 class="form-control"
 placeholder="Venue Name">
 
@@ -660,10 +716,11 @@ placeholder="Venue Name">
 id="onlineLocation"
 style="display:none;">
 
-<label>Meeting Link</label>
+<label for="meetingLinkInput">Meeting Link</label>
 
 <input
 type="url"
+id="meetingLinkInput"
 class="form-control"
 placeholder="https://">
 
@@ -695,17 +752,17 @@ Registration
 
 <div class="col-md-4">
 
-<label>Joining Method</label>
+<label for="joinMethodSelect">Joining Method</label>
 
-<select class="form-select">
+<select class="form-select" id="joinMethodSelect">
 
-<option>
+<option value="instant">
 
 Instant Join
 
 </option>
 
-<option>
+<option value="approval">
 
 Approval Required
 
@@ -717,18 +774,20 @@ Approval Required
 
 <div class="col-md-4">
 
-<label>Capacity</label>
+<label for="capacityInput">Capacity</label>
 
 <input
 type="number"
+id="capacityInput"
 class="form-control"
-placeholder="Unlimited">
+placeholder="Unlimited"
+min="1">
 
 </div>
 
 <div class="col-md-4">
 
-<label>Event Type</label>
+<label for="priceType">Event Type</label>
 
 <select
 class="form-select"
@@ -760,12 +819,14 @@ style="display:none;">
 
 <div class="col-md-4">
 
-<label>Ticket Price</label>
+<label for="ticketPriceInput">Ticket Price</label>
 
 <input
 type="number"
+id="ticketPriceInput"
 class="form-control"
-placeholder="₹">
+placeholder="₹"
+min="1">
 
 </div>
 
@@ -783,6 +844,7 @@ BUTTONS
 
 <button
 type="reset"
+id="cancelBtn"
 class="btn btn-outline-light px-5 me-3">
 
 Cancel
@@ -808,298 +870,461 @@ Create Event
 
 <script>
 
-    // ==========================================
-// Banner Image Preview
-// ==========================================
+// ==========================================================
+// CONFIG
+// ==========================================================
+// Central place for constants so magic strings aren't scattered
+// across the file.
+// ==========================================================
 
-const bannerInput = document.getElementById("bannerInput");
-const bannerPreview = document.getElementById("bannerPreview");
+const STORAGE_KEY = "events";
+const DASHBOARD_URL = "./orgaisers-dashboard.html";
+const DEFAULT_BANNER = "https://placehold.co/600x800?text=Upload+Banner";
 
-bannerInput.addEventListener("change", function () {
 
-    const file = this.files[0];
+// ==========================================================
+// ELEMENT REFERENCES
+// ==========================================================
+// All fields are looked up ONCE by id and cached here.
+// Using ids (instead of positional querySelector like inputs[3])
+// means the form can be reordered/extended later without
+// silently breaking the script.
+// ==========================================================
 
-    if (!file) return;
+const form                 = document.getElementById("createEventForm");
 
-    const reader = new FileReader();
+const bannerInput          = document.getElementById("bannerInput");
+const bannerPreview        = document.getElementById("bannerPreview");
 
-    reader.onload = function (e) {
+const eventNameInput       = document.getElementById("eventNameInput");
+const shortDescriptionInput= document.getElementById("shortDescriptionInput");
+const descriptionInput     = document.getElementById("descriptionInput");
+const categorySelect       = document.getElementById("categorySelect");
+const visibilitySelect     = document.getElementById("visibilitySelect");
 
-        bannerPreview.src = e.target.result;
+const startDateInput       = document.getElementById("startDateInput");
+const startTimeInput       = document.getElementById("startTimeInput");
+const endDateInput         = document.getElementById("endDateInput");
+const endTimeInput         = document.getElementById("endTimeInput");
 
+const eventTypeSelect      = document.getElementById("eventType");
+const offlineLocationBox   = document.getElementById("offlineLocation");
+const onlineLocationBox    = document.getElementById("onlineLocation");
+const venueInput           = document.getElementById("venueInput");
+const meetingLinkInput     = document.getElementById("meetingLinkInput");
+
+const joinMethodSelect     = document.getElementById("joinMethodSelect");
+const capacityInput        = document.getElementById("capacityInput");
+const priceTypeSelect      = document.getElementById("priceType");
+const ticketPriceBox       = document.getElementById("ticketPrice");
+const ticketPriceInput     = document.getElementById("ticketPriceInput");
+
+const errorSummary         = document.getElementById("errorSummary");
+const errorList            = document.getElementById("errorList");
+const successBanner        = document.getElementById("successBanner");
+
+
+// ==========================================================
+// BANNER IMAGE PREVIEW
+// ==========================================================
+// Reads the chosen file as a Data URL and shows it immediately,
+// so the admin can confirm the banner before submitting.
+// ==========================================================
+
+function initBannerPreview() {
+    bannerInput.addEventListener("change", () => {
+        const file = bannerInput.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            bannerPreview.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+
+// ==========================================================
+// ONLINE / OFFLINE LOCATION TOGGLE
+// ==========================================================
+// Shows only the relevant location field based on event type,
+// so the form never submits both a venue and a meeting link.
+// ==========================================================
+
+function initLocationToggle() {
+    eventTypeSelect.addEventListener("change", toggleLocationFields);
+    toggleLocationFields(); // set correct initial state
+}
+
+function toggleLocationFields() {
+    const isOnline = eventTypeSelect.value === "online";
+    onlineLocationBox.style.display  = isOnline ? "block" : "none";
+    offlineLocationBox.style.display = isOnline ? "none"  : "block";
+}
+
+
+// ==========================================================
+// FREE / PAID TICKET TOGGLE
+// ==========================================================
+
+function initPriceToggle() {
+    priceTypeSelect.addEventListener("change", toggleTicketPriceField);
+    toggleTicketPriceField(); // set correct initial state
+}
+
+function toggleTicketPriceField() {
+    const isPaid = priceTypeSelect.value === "paid";
+    ticketPriceBox.style.display = isPaid ? "flex" : "none";
+    if (!isPaid) {
+        ticketPriceInput.value = ""; // clear stale value when switching back to free
+    }
+}
+
+
+// ==========================================================
+// DATE CONSTRAINTS
+// ==========================================================
+// Prevents picking an end date earlier than the start date at
+// the browser level (native date picker "min" attribute).
+// Full start-vs-end validation still happens again on submit,
+// since users can bypass native constraints by typing directly.
+// ==========================================================
+
+function initDateConstraints() {
+    startDateInput.addEventListener("change", () => {
+        endDateInput.min = startDateInput.value;
+    });
+
+    startTimeInput.addEventListener("change", () => {
+        if (startDateInput.value && startDateInput.value === endDateInput.value) {
+            endTimeInput.min = startTimeInput.value;
+        }
+    });
+}
+
+
+// ==========================================================
+// VALIDATION HELPERS
+// ==========================================================
+
+// Marks/unmarks a field as invalid using Bootstrap's is-invalid class
+function setFieldValidity(field, isValid) {
+    field.classList.toggle("is-invalid", !isValid);
+}
+
+function clearAllFieldValidity() {
+    document
+        .querySelectorAll(".is-invalid")
+        .forEach((el) => el.classList.remove("is-invalid"));
+}
+
+function showErrors(errors) {
+    errorList.innerHTML = "";
+    errors.forEach((message) => {
+        const li = document.createElement("li");
+        li.textContent = message;
+        errorList.appendChild(li);
+    });
+    errorSummary.style.display = "block";
+    errorSummary.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function hideErrors() {
+    errorSummary.style.display = "none";
+    errorList.innerHTML = "";
+}
+
+
+// ==========================================================
+// MAIN VALIDATION
+// ==========================================================
+// Checks every required field, plus the more complex rules
+// (date/time ordering, capacity, ticket price). Returns a list
+// of human-readable error messages; an empty list means the
+// form is valid.
+// ==========================================================
+
+function validateForm() {
+    clearAllFieldValidity();
+    const errors = [];
+
+    // --- Basic required text fields ---
+    if (eventNameInput.value.trim() === "") {
+        errors.push("Event name is required.");
+        setFieldValidity(eventNameInput, false);
     }
 
-    reader.readAsDataURL(file);
-
-});
-
-
-
-// ==========================================
-// Online / Offline Toggle
-// ==========================================
-
-const eventType = document.getElementById("eventType");
-
-const offlineLocation = document.getElementById("offlineLocation");
-
-const onlineLocation = document.getElementById("onlineLocation");
-
-eventType.addEventListener("change", () => {
-
-    if (eventType.value === "online") {
-
-        onlineLocation.style.display = "block";
-
-        offlineLocation.style.display = "none";
-
+    if (shortDescriptionInput.value.trim() === "") {
+        errors.push("Short description is required.");
+        setFieldValidity(shortDescriptionInput, false);
     }
 
-    else {
-
-        onlineLocation.style.display = "none";
-
-        offlineLocation.style.display = "block";
-
+    if (descriptionInput.value.trim() === "") {
+        errors.push("Description is required.");
+        setFieldValidity(descriptionInput, false);
     }
 
-});
-
-
-
-// ==========================================
-// Free / Paid Event
-// ==========================================
-
-const priceType = document.getElementById("priceType");
-
-const ticketPrice = document.getElementById("ticketPrice");
-
-priceType.addEventListener("change", () => {
-
-    if (priceType.value === "paid") {
-
-        ticketPrice.style.display = "flex";
-
+    if (categorySelect.value === "") {
+        errors.push("Please choose a category.");
+        setFieldValidity(categorySelect, false);
     }
 
-    else {
-
-        ticketPrice.style.display = "none";
-
+    // --- Date & time ---
+    if (!startDateInput.value) {
+        errors.push("Start date is required.");
+        setFieldValidity(startDateInput, false);
     }
 
-});
+    if (!startTimeInput.value) {
+        errors.push("Start time is required.");
+        setFieldValidity(startTimeInput, false);
+    }
+
+    if (!endDateInput.value) {
+        errors.push("End date is required.");
+        setFieldValidity(endDateInput, false);
+    }
+
+    if (!endTimeInput.value) {
+        errors.push("End time is required.");
+        setFieldValidity(endTimeInput, false);
+    }
+
+    // Only compare start/end as real datetimes once all four values exist
+    if (startDateInput.value && startTimeInput.value && endDateInput.value && endTimeInput.value) {
+        const startDateTime = new Date(`${startDateInput.value}T${startTimeInput.value}`);
+        const endDateTime   = new Date(`${endDateInput.value}T${endTimeInput.value}`);
+
+        if (endDateTime <= startDateTime) {
+            errors.push("End date & time must be after the start date & time.");
+            setFieldValidity(endDateInput, false);
+            setFieldValidity(endTimeInput, false);
+        }
+    }
+
+    // --- Location (depends on online/offline toggle) ---
+    if (eventTypeSelect.value === "online") {
+        if (meetingLinkInput.value.trim() === "") {
+            errors.push("Meeting link is required for online events.");
+            setFieldValidity(meetingLinkInput, false);
+        }
+    } else {
+        if (venueInput.value.trim() === "") {
+            errors.push("Venue is required for offline events.");
+            setFieldValidity(venueInput, false);
+        }
+    }
+
+    // --- Capacity: optional field, but if provided must be a positive number ---
+    if (capacityInput.value !== "") {
+        const capacity = Number(capacityInput.value);
+        if (!Number.isFinite(capacity) || capacity <= 0) {
+            errors.push("Capacity must be a positive number (leave blank for unlimited).");
+            setFieldValidity(capacityInput, false);
+        }
+    }
+
+    // --- Ticket price: required and positive only when the event is paid ---
+    if (priceTypeSelect.value === "paid") {
+        const price = Number(ticketPriceInput.value);
+        if (ticketPriceInput.value === "" || !Number.isFinite(price) || price <= 0) {
+            errors.push("Ticket price must be a positive number for paid events.");
+            setFieldValidity(ticketPriceInput, false);
+        }
+    }
+
+    return errors;
+}
 
 
+// ==========================================================
+// UNIQUE ID GENERATION
+// ==========================================================
+// Prefers crypto.randomUUID() (collision-safe). Falls back to a
+// timestamp + random suffix for older browsers where it's
+// unavailable.
+// ==========================================================
 
-// ==========================================
-// Form Validation
-// ==========================================
+function generateEventId() {
+    if (window.crypto && typeof window.crypto.randomUUID === "function") {
+        return "EVT-" + window.crypto.randomUUID();
+    }
+    const randomSuffix = Math.random().toString(16).slice(2, 8);
+    return `EVT-${Date.now()}-${randomSuffix}`;
+}
 
-const form = document.getElementById("createEventForm");
 
-form.addEventListener("submit", function (e) {
+// ==========================================================
+// BUILD EVENT OBJECT
+// ==========================================================
+// Shapes the form data into the event object used by the
+// listing page, matching the PRD's expected fields.
+// ==========================================================
 
+function buildEventObject() {
+    const isOnline = eventTypeSelect.value === "online";
+    const isPaid   = priceTypeSelect.value === "paid";
+
+    return {
+        id: generateEventId(),
+
+        // PRD fields
+        title: eventNameInput.value.trim(),
+        description: descriptionInput.value.trim(),
+        shortDescription: shortDescriptionInput.value.trim(),
+        category: categorySelect.value,
+        date: startDateInput.value,
+        time: startTimeInput.value,
+        endDate: endDateInput.value,
+        endTime: endTimeInput.value,
+        venue: isOnline ? meetingLinkInput.value.trim() : venueInput.value.trim(),
+        bannerImage: bannerPreview.src,
+        attendees: [],
+        maxAttendees: capacityInput.value === "" ? null : Number(capacityInput.value),
+
+        // Extra fields useful for the listing/registration flow
+        visibility: visibilitySelect.value,
+        eventMode: eventTypeSelect.value,
+        joinMethod: joinMethodSelect.value,
+        priceType: priceTypeSelect.value,
+        ticketPrice: isPaid ? Number(ticketPriceInput.value) : 0,
+
+        createdAt: new Date().toISOString()
+    };
+}
+
+
+// ==========================================================
+// LOCALSTORAGE PERSISTENCE
+// ==========================================================
+// Reads existing events (if any), appends the new one, and
+// writes back. Wrapped in try/catch to handle storage-disabled
+// or storage-full environments gracefully instead of crashing.
+// ==========================================================
+
+function getStoredEvents() {
+    try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        const parsed = raw ? JSON.parse(raw) : [];
+        return Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+        console.error("Failed to read events from localStorage:", error);
+        return [];
+    }
+}
+
+function saveEventToStorage(event) {
+    try {
+        const events = getStoredEvents();
+        events.push(event);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(events));
+        return true;
+    } catch (error) {
+        console.error("Failed to save event to localStorage:", error);
+        return false;
+    }
+}
+
+
+// ==========================================================
+// FORM RESET / SUCCESS UI
+// ==========================================================
+
+function resetFormUI() {
+    form.reset();
+    bannerPreview.src = DEFAULT_BANNER;
+    toggleTicketPriceField();
+    toggleLocationFields();
+    clearAllFieldValidity();
+    hideErrors();
+    successBanner.style.display = "none";
+}
+
+function showSuccessAndRedirect() {
+    // Uses an in-page banner instead of alert(), because alert() is
+    // silently blocked in some embedded/IDE browser previews (e.g. VS
+    // Code Live Preview), which made the button look unresponsive even
+    // though the event was actually being saved correctly.
+    successBanner.style.display = "block";
+    if (typeof successBanner.scrollIntoView === "function") {
+        successBanner.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    // Give the user a moment to see the confirmation before navigating away.
+    window.setTimeout(() => {
+        resetFormUI();
+        window.location.href = DASHBOARD_URL;
+    }, 1200);
+}
+
+
+// ==========================================================
+// FORM SUBMIT HANDLER
+// ==========================================================
+
+function handleFormSubmit(e) {
     e.preventDefault();
 
-    const eventName = document.querySelector("input[placeholder='Enter event name']").value.trim();
+    const errors = validateForm();
 
-    const shortDescription = document.querySelector("input[placeholder='One line summary']").value.trim();
-
-    const description = document.querySelector("textarea").value.trim();
-
-    const category = document.querySelector("select").value;
-
-    const startDate = document.querySelector("input[type='date']").value;
-
-    const startTime = document.querySelector("input[type='time']").value;
-
-    if (
-        eventName === "" ||
-        shortDescription === "" ||
-        description === "" ||
-        category === "Choose Category" ||
-        startDate === "" ||
-        startTime === ""
-    ) {
-
-        alert("Please fill all required fields.");
-
+    if (errors.length > 0) {
+        showErrors(errors);
         return;
-
     }
 
-    createEvent();
-
-});
-
-
-
-// ==========================================
-// Create Event Object
-// ==========================================
-
-function createEvent() {
-
-    const inputs = document.querySelectorAll("input");
-
-    const selects = document.querySelectorAll("select");
-
-    const textarea = document.querySelector("textarea");
-
-    const event = {
-
-        id: generateID(),
-
-        banner: bannerPreview.src,
-
-        name: inputs[1].value,
-
-        shortDescription: inputs[2].value,
-
-        description: textarea.value,
-
-        category: selects[0].value,
-
-        visibility: selects[1].value,
-
-        startDate: inputs[3].value,
-
-        startTime: inputs[4].value,
-
-        endDate: inputs[5].value,
-
-        endTime: inputs[6].value,
-
-        eventMode: selects[2].value,
-
-        location:
-            selects[2].value === "online"
-                ? inputs[8].value
-                : inputs[7].value,
-
-        joinMethod: selects[3].value,
-
-        capacity: inputs[9].value,
-
-        priceType: selects[4].value,
-
-        ticketPrice:
-            selects[4].value === "paid"
-                ? inputs[10].value
-                : "Free",
-
-        createdAt: new Date(),
-
-        attendees: []
-
-    };
-
-
-
-    let events = JSON.parse(localStorage.getItem("events")) || [];
-
-    events.push(event);
-
-    localStorage.setItem("events", JSON.stringify(events));
-
-    successMessage();
-
-}
-
-
-
-// ==========================================
-// Unique ID
-// ==========================================
-
-function generateID() {
-
-    return "EVT-" + Date.now();
-
-}
-
-
-
-// ==========================================
-// Success Popup
-// ==========================================
-
-function successMessage() {
-
-    alert("🎉 Event Created Successfully!");
-
-    form.reset();
-
-    bannerPreview.src = "https://placehold.co/600x800?text=Upload+Banner";
-
-    ticketPrice.style.display = "none";
-
-    onlineLocation.style.display = "none";
-
-    offlineLocation.style.display = "block";
-
-    // Redirect to Organizer Dashboard
-    window.location.href = "./orgaisers-dashboard.html";
-
-}
-
-
-
-// ==========================================
-// Prevent End Date Before Start Date
-// ==========================================
-
-const dates = document.querySelectorAll("input[type='date']");
-
-const times = document.querySelectorAll("input[type='time']");
-
-dates[0].addEventListener("change", () => {
-
-    dates[1].min = dates[0].value;
-
-});
-
-times[0].addEventListener("change", () => {
-
-    if (dates[0].value === dates[1].value) {
-
-        times[1].min = times[0].value;
-
+    hideErrors();
+    successBanner.style.display = "none";
+
+    const newEvent = buildEventObject();
+    const saved = saveEventToStorage(newEvent);
+
+    if (!saved) {
+        showErrors(["Could not save the event. Your browser storage may be full or disabled."]);
+        return;
     }
 
-});
-
-
-
-// ==========================================
-// Character Counter (Optional)
-// ==========================================
-
-const desc = document.querySelector("textarea");
-
-desc.addEventListener("input", () => {
-
-    console.log(`Characters : ${desc.value.length}`);
-
-});
-
-
-
-// ==========================================
-// Load Existing Events (Optional)
-// ==========================================
-
-function loadEvents() {
-
-    const events = JSON.parse(localStorage.getItem("events")) || [];
-
-    console.log(events);
-
+    showSuccessAndRedirect();
 }
 
-loadEvents();
+
+// ==========================================================
+// INIT
+// ==========================================================
+// Wires up all event listeners once the script loads.
+// ==========================================================
+
+function init() {
+    // Each setup step is wrapped individually so that one broken piece
+    // (e.g. a missing element) can't silently prevent the submit handler
+    // from being attached, which is what makes a button look "dead".
+    const steps = [
+        ["banner preview", initBannerPreview],
+        ["location toggle", initLocationToggle],
+        ["price toggle", initPriceToggle],
+        ["date constraints", initDateConstraints]
+    ];
+
+    steps.forEach(([name, fn]) => {
+        try {
+            fn();
+        } catch (error) {
+            console.error(`Failed to initialize ${name}:`, error);
+        }
+    });
+
+    // The submit handler is the most important piece — attach it last
+    // and outside the loop above so a failure elsewhere can never skip it.
+    try {
+        form.addEventListener("submit", handleFormSubmit);
+    } catch (error) {
+        console.error("Failed to attach form submit handler:", error);
+        showErrors(["Something went wrong loading the form. Check the browser console for details."]);
+    }
+}
+
+init();
+
 </script>
 
 </body>
