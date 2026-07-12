@@ -775,14 +775,7 @@ Edit Event
 
 </button>
 
-<button class="btn btn-danger"
-        id="deleteEvent">
 
-<i class="bi bi-trash3"></i>
-
-Delete Event
-
-</button>
 
 </div>
 
@@ -805,7 +798,6 @@ Delete Event
 <script>
   // =========================================================
   // CONSTANTS
-  // Centralized so field names / keys are never typo'd twice
   // =========================================================
   const STORAGE_KEY = "events";
   const STATUS = { PENDING: "Pending", GOING: "Going" };
@@ -813,12 +805,11 @@ Delete Event
     "https://images.unsplash.com/photo-1511578314322-379afb476865?w=1600";
   const DEFAULT_AVATAR_IMAGE =
     "https://ui-avatars.com/api/?background=334155&color=fff&name=User";
-  const DASHBOARD_URL = "organizer-dashboard.html";
-  const EDIT_EVENT_URL = "create-event.html";
+  const DASHBOARD_URL = "./orgaisers-dashboard.html";
+  const EDIT_EVENT_URL = "createEvent.html"; // must match your real Create Event filename
 
   // =========================================================
   // DOM ELEMENT CACHE
-  // Grabbed once, reused everywhere instead of re-querying
   // =========================================================
   const dom = {
     banner: document.getElementById("eventBanner"),
@@ -834,11 +825,9 @@ Delete Event
     pendingContainer: document.getElementById("pendingContainer"),
     goingContainer: document.getElementById("goingContainer"),
     editBtn: document.getElementById("editEvent"),
-    deleteBtn: document.getElementById("deleteEvent"),
+    // deleteBtn intentionally removed — Delete now lives only on the Dashboard.
   };
 
-  // In-memory state. `events` is the full list, `currentEvent`
-  // is the single event this page is managing.
   let events = [];
   let currentEvent = null;
 
@@ -846,15 +835,9 @@ Delete Event
   // UTILITY HELPERS
   // =========================================================
 
-  /**
-   * Safely reads events array from LocalStorage.
-   * Returns [] if the key is missing, corrupt, or not an array,
-   * instead of letting JSON.parse throw and crash the page.
-   */
   function loadEventsFromStorage() {
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      const parsed = JSON.parse(raw);
+      const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY));
       return Array.isArray(parsed) ? parsed : [];
     } catch (error) {
       console.error("Failed to parse events from LocalStorage:", error);
@@ -862,50 +845,37 @@ Delete Event
     }
   }
 
-  /** Persists the full events array back to LocalStorage. */
   function saveEventsToStorage(eventList) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(eventList));
   }
 
-  /**
-   * Finds an event by ID, comparing as strings so it doesn't matter
-   * whether IDs were stored as numbers or strings elsewhere in the app.
-   */
   function findEventById(eventList, id) {
     return eventList.find((event) => String(event?.id) === String(id));
   }
 
-  /** Escapes user-entered text before it goes into innerHTML. */
   function escapeHtml(value) {
     const div = document.createElement("div");
     div.textContent = value ?? "";
     return div.innerHTML;
   }
 
-  /** Formats a start/end date pair into a readable string. */
   function formatDateRange(startDate, endDate) {
     if (!startDate) return "Date not specified";
     const start = new Date(startDate).toLocaleDateString("en-IN", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
+      day: "numeric", month: "long", year: "numeric",
     });
     if (!endDate || endDate === startDate) return start;
     const end = new Date(endDate).toLocaleDateString("en-IN", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
+      day: "numeric", month: "long", year: "numeric",
     });
     return `${start} - ${end}`;
   }
 
-  /** Formats a start/end time pair into a readable string. */
   function formatTimeRange(startTime, endTime) {
     if (!startTime) return "Time not specified";
     return endTime ? `${startTime} - ${endTime}` : startTime;
   }
 
-  /** Returns a safe image URL, falling back to a placeholder if empty. */
   function resolveImage(url, fallback) {
     return url && url.trim() !== "" ? url : fallback;
   }
@@ -927,8 +897,6 @@ Delete Event
       return;
     }
 
-    // Defensive default: guarantee attendees is always an array
-    // so every downstream filter/map is safe.
     if (!Array.isArray(currentEvent.attendees)) {
       currentEvent.attendees = [];
     }
@@ -958,7 +926,7 @@ Delete Event
   }
 
   // =========================================================
-  // RENDER: ATTENDEES (stats + both lists)
+  // RENDER: ATTENDEES
   // =========================================================
 
   function renderAttendees() {
@@ -973,21 +941,14 @@ Delete Event
     renderAttendeeList(dom.goingContainer, goingUsers, false, "No attendees have been approved yet.");
   }
 
-  /**
-   * Renders one list (pending or going) into the given container.
-   * Reused for both sections instead of duplicating markup.
-   */
   function renderAttendeeList(container, users, isPending, emptyMessage) {
     if (users.length === 0) {
       container.innerHTML = `<p class="text-secondary">${emptyMessage}</p>`;
       return;
     }
-
-    const cardsHtml = users.map((user) => createAttendeeCard(user, isPending)).join("");
-    container.innerHTML = cardsHtml;
+    container.innerHTML = users.map((user) => createAttendeeCard(user, isPending)).join("");
   }
 
-  /** Builds the HTML for a single attendee card. */
   function createAttendeeCard(user, isPending) {
     const safeName = escapeHtml(user?.name || "Unknown Attendee");
     const safeEmail = escapeHtml(user?.email || "No email provided");
@@ -996,26 +957,19 @@ Delete Event
 
     const actionButtons = isPending
       ? `
-        <button class="btn btn-success me-2" data-action="approve" data-id="${userId}">
-          Approve
-        </button>
-        <button class="btn btn-danger" data-action="reject" data-id="${userId}">
-          Reject
-        </button>
+        <button class="btn btn-success me-2" data-action="approve" data-id="${userId}">Approve</button>
+        <button class="btn btn-danger" data-action="reject" data-id="${userId}">Reject</button>
       `
       : `
         <span class="status-badge going">Going</span>
-        <button class="btn btn-outline-danger ms-3" data-action="remove" data-id="${userId}">
-          Remove
-        </button>
+        <button class="btn btn-outline-danger ms-3" data-action="remove" data-id="${userId}">Remove</button>
       `;
 
     return `
       <div class="attendee-card">
         <div class="row align-items-center">
           <div class="col-lg-6 d-flex align-items-center">
-            <img src="${avatarSrc}" class="user-avatar me-3"
-                 onerror="this.src='${DEFAULT_AVATAR_IMAGE}'">
+            <img src="${avatarSrc}" class="user-avatar me-3" onerror="this.src='${DEFAULT_AVATAR_IMAGE}'">
             <div>
               <div class="user-name">${safeName}</div>
               <div class="user-email">${safeEmail}</div>
@@ -1041,20 +995,15 @@ Delete Event
   }
 
   function rejectAttendee(userId) {
-    currentEvent.attendees = currentEvent.attendees.filter(
-      (u) => String(u?.id) !== String(userId)
-    );
+    currentEvent.attendees = currentEvent.attendees.filter((u) => String(u?.id) !== String(userId));
     persistAndRerender();
   }
 
   function removeAttendee(userId) {
-    currentEvent.attendees = currentEvent.attendees.filter(
-      (u) => String(u?.id) !== String(userId)
-    );
+    currentEvent.attendees = currentEvent.attendees.filter((u) => String(u?.id) !== String(userId));
     persistAndRerender();
   }
 
-  /** Saves currentEvent back into the full list, persists, then re-renders. */
   function persistAndRerender() {
     events = events.map((event) =>
       String(event.id) === String(currentEvent.id) ? currentEvent : event
@@ -1068,33 +1017,19 @@ Delete Event
   // =========================================================
 
   function attachStaticEventListeners() {
-    // Delegated listener: one handler per container instead of
-    // inline onclick attributes on every generated button.
     dom.pendingContainer.addEventListener("click", handleAttendeeAction);
     dom.goingContainer.addEventListener("click", handleAttendeeAction);
-
-    dom.deleteBtn.addEventListener("click", handleDeleteEvent);
     dom.editBtn.addEventListener("click", handleEditEvent);
+    // No delete listener — button removed from this page per requirement #5.
   }
 
   function handleAttendeeAction(clickEvent) {
     const button = clickEvent.target.closest("button[data-action]");
     if (!button) return;
-
     const { action, id } = button.dataset;
-
     if (action === "approve") approveAttendee(id);
     else if (action === "reject") rejectAttendee(id);
     else if (action === "remove") removeAttendee(id);
-  }
-
-  function handleDeleteEvent() {
-    const confirmed = confirm("Are you sure you want to delete this event? This cannot be undone.");
-    if (!confirmed) return;
-
-    events = events.filter((event) => String(event.id) !== String(currentEvent.id));
-    saveEventsToStorage(events);
-    window.location.href = DASHBOARD_URL;
   }
 
   function handleEditEvent() {
