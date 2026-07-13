@@ -23,6 +23,36 @@ const STATUS = {
 
 const eventsContainer = document.getElementById("eventsContainer");
 
+const dateFilter = document.getElementById("dateFilter");
+const categoryFilter = document.getElementById("categoryFilter");
+
+// ==========================================
+// CATEGORY FILTER
+// ==========================================
+
+categoryFilter.addEventListener("change", () => {
+
+    const selectedCategory = categoryFilter.value;
+
+    const events = getEvents();
+
+    if (!selectedCategory) {
+
+        loadEvents();
+        return;
+
+    }
+
+    const filteredEvents = events.filter(event =>
+
+        event.category === selectedCategory
+
+    );
+
+    renderEvents(filteredEvents);
+
+});
+
 // ==========================================
 // LOCAL STORAGE
 // ==========================================
@@ -298,6 +328,31 @@ function loadEvents() {
     renderEvents(events);
 
 }
+
+// ==========================================
+// DATE FILTER
+// ==========================================
+
+dateFilter.addEventListener("change", () => {
+
+    const selectedDate = dateFilter.value;
+
+    const events = getEvents();
+
+    if (!selectedDate) {
+
+        loadEvents();
+        return;
+
+    }
+
+    const filteredEvents = events.filter(event =>
+        event.startDate === selectedDate
+    );
+
+    renderEvents(filteredEvents);
+
+});
 
 // ==========================================
 // REGISTER EVENT
