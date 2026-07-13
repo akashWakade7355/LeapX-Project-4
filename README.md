@@ -70,7 +70,7 @@ The project follows a clean folder structure by separating **Admin**, **User**, 
 
 ## 🤖 Chatbot
 
-![Chatbot](./images/chatbot.png)
+![Chatbot](images/chatbot.png)
 
 ---
 
