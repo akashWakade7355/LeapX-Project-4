@@ -64,30 +64,20 @@ The project follows a clean folder structure by separating **Admin**, **User**, 
 
 ## 🏠 Homepage
 
-```md
-<img src="./images/index-page.png">
 ![Homepage](./images/index-page.png)
-```
 
 ---
 
 ## 🤖 Chatbot
 
-> Add chatbot screenshot here.
-
-```md
 ![Chatbot](./images/Chatbot.png)
-```
 
 ---
 
 ## 📂 Browse Categories
 
-> Add category page screenshot here.
 
-```md
 ![Categories](./images/Brows-By-Category.png)
-```
 
 ---
 
