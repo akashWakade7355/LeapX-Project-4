@@ -282,24 +282,65 @@ function loadEvents() {
 }
 
 // ==========================================
-// REGISTER BUTTON
-// (Phase 2 Logic)
+// REGISTER EVENT
 // ==========================================
 
 document.addEventListener("click", function (e) {
 
-    if (!e.target.classList.contains("register-btn")) {
-
-        return;
-
-    }
+    if (!e.target.classList.contains("register-btn")) return;
 
     const eventId = e.target.dataset.id;
 
-    localStorage.setItem("selectedEventId", eventId);
+    let events = getEvents();
 
-    // Temporary
-    alert("Registration feature will be added in Phase 2.");
+    const event = events.find(
+    ev => String(ev.id) === String(eventId)
+);
+
+    if (!event) {
+        alert("Event not found.");
+        return;
+    }
+
+    // Create attendees array if missing
+    if (!Array.isArray(event.attendees)) {
+        event.attendees = [];
+    }
+
+    // Demo user
+    const currentUser = {
+        id: "USER_001",
+        name: "Demo User",
+        status: "Going"
+    };
+
+    // Prevent duplicate registration
+    const alreadyRegistered = event.attendees.some(
+        attendee => attendee.id === currentUser.id
+    );
+
+    if (alreadyRegistered) {
+        alert("You have already registered for this event.");
+        return;
+    }
+
+    // Capacity check
+    if (
+        event.capacity &&
+        event.attendees.length >= Number(event.capacity)
+    ) {
+        alert("Event is Full.");
+        return;
+    }
+
+    // Register user
+    event.attendees.push(currentUser);
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(events));
+
+    alert("Registration Successful!");
+
+    loadEvents();
 
 });
 
