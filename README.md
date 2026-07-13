@@ -67,7 +67,7 @@ The project follows a clean folder structure by separating **Admin**, **User**, 
 > Add your homepage screenshot here.
 
 ```md
-![Homepage](images/homepage.png)
+![Homepage](./images/index-page.png)
 ```
 
 ---
@@ -77,7 +77,7 @@ The project follows a clean folder structure by separating **Admin**, **User**, 
 > Add chatbot screenshot here.
 
 ```md
-![Chatbot](images/chatbot.png)
+![Chatbot](./images/Chatbot.png)
 ```
 
 ---
@@ -87,7 +87,7 @@ The project follows a clean folder structure by separating **Admin**, **User**, 
 > Add category page screenshot here.
 
 ```md
-![Categories](images/categories.png)
+![Categories](./images/Brows-By-Category.png)
 ```
 
 ---
