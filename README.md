@@ -64,9 +64,8 @@ The project follows a clean folder structure by separating **Admin**, **User**, 
 
 ## 🏠 Homepage
 
-> Add your homepage screenshot here.
-
 ```md
+<img src="./images/index-page.png">
 ![Homepage](./images/index-page.png)
 ```
 
