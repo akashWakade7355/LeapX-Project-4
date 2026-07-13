@@ -155,7 +155,11 @@ function createEventCard(event){
 
         <div class="col-lg-4 col-md-6">
 
-            <div class="event-card">
+            <div
+                class="event-card"
+                onclick="window.location.href='eventDetails.html?id=${event.id}'"
+                style="cursor:pointer;"
+            >
 
                 <img
                     src="${imageURL(event.bannerImage)}"
@@ -224,18 +228,20 @@ function createEventCard(event){
                         ?
                         
                 `<button
-                        class="event-btn"
-                        disabled
-                        style="background:#198754;cursor:not-allowed;">
+                    class="event-btn"
+                    disabled
+                    onclick="event.stopPropagation()"
+                    style="background:#198754;cursor:not-allowed;">
                         ✓ Registered
                     </button>`
 
                     :
 
-                    `<button
-                        class="event-btn register-btn"
-                        data-id="${event.id}">
-                        Register
+                `<button
+                     class="event-btn register-btn"
+                     data-id="${event.id}"
+                     onclick="event.stopPropagation()">
+                     Register
                 </button>`
 }
 
