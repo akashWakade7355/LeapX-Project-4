@@ -70,6 +70,46 @@ function getRegisteredEvents() {
 }
 
 // ==========================================
+// GET PAST EVENTS
+// ==========================================
+
+function getPastEvents() {
+
+    const now = new Date();
+
+    return getRegisteredEvents().filter(event => {
+
+        const eventDateTime = new Date(
+            `${event.startDate}T${event.startTime || "00:00"}`
+        );
+
+        return eventDateTime < now;
+
+    });
+
+}
+
+// ==========================================
+// GET UPCOMING EVENTS
+// ==========================================
+
+function getUpcomingEvents() {
+
+    const now = new Date();
+
+    return getRegisteredEvents().filter(event => {
+
+        const eventDateTime = new Date(
+            `${event.startDate}T${event.startTime || "00:00"}`
+        );
+
+        return eventDateTime >= now;
+
+    });
+
+}
+
+// ==========================================
 // RENDER REGISTERED EVENTS
 // ==========================================
 
@@ -77,7 +117,12 @@ function renderRegisteredEvents() {
 
     if (!eventsContainer) return;
 
-    const events = getRegisteredEvents();
+    const isPastPage =
+    window.location.pathname.includes("registeredEvents-past");
+
+    const events = isPastPage
+    ? getPastEvents()
+    : getUpcomingEvents();
 
     if (events.length === 0) {
 
