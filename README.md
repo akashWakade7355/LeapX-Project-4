@@ -199,7 +199,7 @@ Seed/
 Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/Seed.git
+git clone https://github.com/akashWakade7355/LeapX-Project-4.git
 ```
 
 Open project
