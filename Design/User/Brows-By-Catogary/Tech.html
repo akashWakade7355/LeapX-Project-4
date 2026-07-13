@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech</title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <style>
+
+         body{
+    background:#0f1117;
+    color:white;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+/*==================================
+        Floating Chat Widget
+===================================*/
+
+.chat-widget{
+
+    position:fixed;
+
+    bottom:30px;
+
+    right:30px;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    gap:15px;
+
+    z-index:999;
+
+}
+
+/* Chat Popup */
+
+.chat-popup{
+
+    background:linear-gradient(180deg,#172547,#101B34);
+
+    border:1px solid #2C4F87;
+
+    padding:18px 22px;
+
+    border-radius:18px;
+
+    color:white;
+
+    width:230px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.35);
+
+    animation:float 3s ease-in-out infinite;
+
+}
+
+.chat-popup h6{
+
+    color:#60A5FA;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+}
+
+.chat-popup p{
+
+    color:#B8CAE6;
+
+    margin:0;
+
+    font-size:.95rem;
+
+}
+
+/* Chat Button */
+
+.chat-btn{
+
+    width:72px;
+
+    height:72px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:linear-gradient(135deg,#3B82F6,#2563EB);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    box-shadow:0 12px 35px rgba(37,99,235,.45);
+
+    transition:.3s;
+
+    overflow:hidden;
+
+}
+
+.chat-btn img{
+
+    width:60px;
+
+    height:60px;
+
+    object-fit:contain;
+
+}
+
+.chat-btn:hover{
+
+    transform:scale(1.08);
+
+    box-shadow:0 20px 45px rgba(37,99,235,.55);
+
+}
+/* Floating Animation */
+
+@keyframes float{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-8px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/*=========================
+      MODERN header
+==========================*/
+
+.modern-footer{
+
+
+    background:#0f1117;
+
+
+    border-top:1px solid #243B65;
+
+    padding:22px 0;
+
+}
+
+.footer-wrapper{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+}
+
+.footer-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:35px;
+
+}
+
+.footer-left a{
+
+    text-decoration:none;
+
+    color:#9AAFD2;
+
+    font-weight:600;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    transition:.3s;
+
+}
+
+.footer-left a:hover{
+
+    color:white;
+
+}
+
+.footer-left .active{
+
+    color:white;
+
+}
+
+.footer-logo{
+
+    font-size:1.6rem;
+
+    color:#60A5FA !important;
+
+}
+
+.footer-center{
+
+    color:#AFC2E7;
+
+    font-weight:600;
+
+    font-size:1rem;
+
+}
+
+.footer-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+.create-btn{
+
+    border:none;
+
+    background:none;
+
+    color:white;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.create-btn:hover{
+
+    color:#60A5FA;
+
+}
+
+.footer-icon{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#1B315C;
+
+    color:white;
+
+    position:relative;
+
+    transition:.3s;
+
+}
+
+.footer-icon:hover{
+
+    background:#3B82F6;
+
+}
+
+.notification span{
+
+    position:absolute;
+
+    width:10px;
+
+    height:10px;
+
+    background:#ff3b3b;
+
+    border-radius:50%;
+
+    top:7px;
+
+    right:8px;
+
+}
+
+.footer-profile{
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:2px solid #3B82F6;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.footer-profile:hover{
+
+    transform:scale(1.08);
+
+}
+/* ================= HERO ================= */
+
+.hero{
+    min-height:90vh;
+    display:flex;
+    align-items:center;
+    background:#111216;
+}
+
+/* Left */
+
+.hero-title{
+
+    font-size:5rem;
+    font-weight:800;
+    color:#fff;
+}
+
+.hero-stats{
+
+    display:flex;
+    gap:35px;
+    margin:25px 0;
+}
+
+.hero-stats span{
+
+    color:#cfcfcf;
+    font-size:1.2rem;
+    font-weight:500;
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.hero-line{
+
+    width:100%;
+    border-color:#2f3138;
+    margin:30px 0;
+}
+
+.hero-text{
+
+    max-width:520px;
+
+    color:#b7b7b7;
+
+    font-size:1.25rem;
+
+    line-height:1.8;
+}
+
+.subscribe-btn{
+
+    margin-top:35px;
+
+    background:#2b2c30;
+    color:#fff;
+
+    width:220px;
+    height:60px;
+
+    border-radius:50px;
+
+    font-size:1.1rem;
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.subscribe-btn:hover{
+
+    background:#3b3c41;
+    color:#fff;
+}
+
+/* Right Card */
+
+.hero-card{
+
+    width:480px;
+    height:560px;
+
+    background:#242529;
+
+    border-radius:30px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:30px;
+}
+
+.card-icon{
+
+    width:60px;
+    height:60px;
+
+    background:#453715;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:#e8b93d;
+    font-size:22px;
+}
+
+.hero-image{
+
+    width:340px;
+    height:340px;
+
+    margin:45px auto;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    background:#50452c;
+}
+
+.hero-image img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+}
+
+.card-footer{
+
+    position:absolute;
+
+    bottom:30px;
+    left:30px;
+    right:30px;
+
+    display:flex;
+    justify-content:space-between;
+
+    font-weight:600;
+
+    color:#5f6064;
+}
+
+.card-footer .active{
+
+    color:#d4a52a;
+}
+
+/* Responsive */
+
+@media(max-width:992px){
+
+.hero{
+
+padding:60px 0;
+text-align:center;
+}
+
+.hero-title{
+
+font-size:3.5rem;
+}
+
+.hero-stats{
+
+justify-content:center;
+flex-wrap:wrap;
+}
+
+.hero-text{
+
+margin:auto;
+}
+
+.hero-card{
+
+width:100%;
+max-width:420px;
+height:auto;
+padding-bottom:80px;
+}
+
+.hero-image{
+
+width:280px;
+height:280px;
+}
+
+}
+
+/* ================= UPCOMING EVENTS ================= */
+
+.upcoming-events{
+
+    padding:100px 0;
+    background:#111216;
+}
+
+.section-title{
+
+    color:#fff;
+    font-size:2.3rem;
+    font-weight:700;
+}
+
+.section-subtitle{
+
+    color:#8b8b8b;
+    margin-top:10px;
+}
+
+.view-btn{
+
+    color:#fff;
+    border:1px solid #333;
+    border-radius:40px;
+    padding:12px 28px;
+}
+
+.view-btn:hover{
+
+    background:#ffffff10;
+    color:#fff;
+}
+
+.event-card{
+
+    background:#1a1b20;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    transition:.35s;
+
+    border:1px solid transparent;
+}
+
+.event-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#3b82f6;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.35);
+}
+
+.event-image{
+
+    width:100%;
+
+    height:230px;
+
+    object-fit:cover;
+}
+
+.event-content{
+
+    padding:25px;
+}
+
+.event-tag{
+
+    display:inline-block;
+
+    padding:6px 15px;
+
+    border-radius:30px;
+
+    background:#2b3b6e;
+
+    color:#84b2ff;
+
+    font-size:.8rem;
+
+    margin-bottom:18px;
+}
+
+.event-content h4{
+
+    color:#fff;
+
+    font-size:1.4rem;
+
+    margin-bottom:15px;
+}
+
+.event-content p{
+
+    color:#9f9f9f;
+
+    line-height:1.7;
+}
+
+.event-info{
+
+    margin-top:25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    color:#bdbdbd;
+
+    font-size:.95rem;
+}
+
+/* ================= Nearby Events ================= */
+
+.nearby-events{
+
+    background:#121316;
+    padding:90px 0;
+
+}
+
+.section-heading{
+
+    color:#fff;
+    font-weight:700;
+}
+
+/* Timeline */
+
+.timeline{
+
+    border-left:2px dashed #303236;
+    margin-left:15px;
+
+}
+
+.timeline-item{
+
+    position:relative;
+    padding-left:30px;
+    margin-bottom:45px;
+
+}
+
+.timeline-item::before{
+
+    content:"";
+
+    width:12px;
+    height:12px;
+
+    background:#666;
+
+    border-radius:50%;
+
+    position:absolute;
+    left:-7px;
+    top:8px;
+
+}
+
+.date{
+
+    margin-bottom:15px;
+
+}
+
+.date span{
+
+    color:#fff;
+    font-size:26px;
+    font-weight:700;
+
+}
+
+.date small{
+
+    color:#888;
+    font-size:22px;
+
+}
+
+/* Card */
+
+.event-card{
+
+    background:#1b1d21;
+
+    border-radius:20px;
+
+    padding:20px 22px;
+
+    transition:.3s;
+
+}
+
+.event-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+
+}
+
+.event-time{
+
+    color:#8e8e8e;
+    font-size:17px;
+    margin-bottom:6px;
+
+}
+
+.event-card h4{
+
+    color:#fff;
+    font-size:28px;
+    margin-bottom:10px;
+
+}
+
+.host,
+.location{
+
+    color:#9b9b9b;
+    margin-bottom:8px;
+    font-size:18px;
+
+}
+
+.banner{
+
+    width:140px;
+    height:140px;
+
+    object-fit:cover;
+
+    border-radius:16px;
+
+}
+
+/* Attendees */
+
+.attendees{
+
+    display:flex;
+    align-items:center;
+    margin-top:15px;
+
+}
+
+.attendees img{
+
+    width:30px;
+    height:30px;
+
+    border-radius:50%;
+
+    border:2px solid #1b1d21;
+
+    margin-left:-8px;
+
+}
+
+.attendees img:first-child{
+
+    margin-left:0;
+
+}
+
+.sold{
+
+    background:#532727;
+
+    color:#ff7d7d;
+
+    padding:4px 12px;
+
+    border-radius:8px;
+
+    font-size:13px;
+
+    margin-right:15px;
+
+}
+
+.count{
+
+    width:30px;
+    height:30px;
+
+    border-radius:50%;
+
+    background:#34373e;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    margin-left:-8px;
+
+    color:#fff;
+    font-size:13px;
+
+}
+
+/* Right */
+
+.community-card{
+
+    margin-top:15px;
+
+}
+
+.community-icon{
+
+    width:65px;
+    height:65px;
+
+    border-radius:50%;
+
+    background:#d6a20a;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:white;
+    font-size:26px;
+
+    margin-bottom:20px;
+
+}
+
+.community-card h2{
+
+    color:#fff;
+
+}
+
+.community-card p{
+
+    color:#9d9d9d;
+    line-height:1.8;
+    margin:18px 0;
+
+}
+
+.subscribe-btn{
+
+    width:100%;
+    height:52px;
+
+    border-radius:40px;
+
+    background:#2c2d32;
+
+    color:#fff;
+
+}
+
+.subscribe-btn:hover{
+
+    background:#3a3b40;
+    color:#fff;
+
+}
+
+.map-card img{
+
+    width:100%;
+    border-radius:20px;
+
+}
+    </style>
+</head>
+<body>
+     <!--=========================
+        Modern header
+==========================-->
+
+<header class="modern-footer">
+
+    <div class="container-fluid px-5">
+
+        <div class="footer-wrapper">
+
+            <!-- Left -->
+
+            <div class="footer-left">
+
+                <a href="#" class="footer-logo">
+
+                    <i class="bi bi-stars"></i>
+
+                </a>
+
+                <a href="../registeredEvents.html" >
+                    <i class="bi bi-calendar-event"></i>
+                    Registered Events
+                </a>
+
+                <a href="./homepage.html"  class="active">
+
+                    <i class="bi bi-compass"></i>
+
+                    Discover
+
+                </a>
+
+            </div>
+
+            <!-- Center -->
+
+            <div class="footer-center">
+
+                <span id="liveTime">
+
+                    4:43 PM IST
+
+                </span>
+
+            </div>
+
+            <!-- Right -->
+
+            <div class="footer-right">
+
+                 <a href="../../Admin/createEvent.html">
+                    <button class="create-btn">
+
+                    Create Event
+
+                </button>
+
+                </a>
+
+                <button class="footer-icon">
+
+                    <i class="bi bi-search"></i>
+
+                </button>
+
+                <button class="footer-icon notification">
+
+                    <i class="bi bi-bell"></i>
+
+                    <span></span>
+
+                </button>
+
+                <img
+                    src="https://i.pravatar.cc/100?img=15"
+                    class="footer-profile"
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!--hero section-->
+
+<section class="hero py-5">
+
+    <div class="container">
+
+        <div class="row align-items-center gy-5">
+
+            <!-- Left Content -->
+            <div class="col-lg-6">
+
+                <h1 class="hero-title">
+                    Tech
+                </h1>
+
+                <div class="hero-stats">
+
+                    <span>
+                        <i class="bi bi-calendar3"></i>
+                        3K Events
+                    </span>
+
+                    <span>
+                        <i class="bi bi-people"></i>
+                        54K Subscribers
+                    </span>
+
+                </div>
+
+                <hr class="hero-line">
+
+                <p class="hero-text">
+
+                    Join hackathons, startup meetups, AI workshops,
+                    product design sessions, and networking events
+                    with fellow innovators shaping tomorrow.
+
+                </p>
+
+                <button class="btn subscribe-btn">
+                    Subscribed
+                </button>
+
+            </div>
+
+            <!-- Right Card -->
+            <div class="col-lg-6 d-flex justify-content-center">
+
+                <div class="hero-card">
+
+                    <div class="card-icon">
+                        <i class="bi bi-grid-3x3-gap-fill"></i>
+                    </div>
+
+                    <div class="hero-image">
+
+                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=300" alt="Tech">
+
+                    </div>
+
+                    <div class="card-footer">
+
+                        <span>DISCOVER</span>
+
+                        <span class="active">TECH</span>
+
+                        <span>EVENTS</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= UPCOMING EVENTS ================= -->
+
+<section class="upcoming-events py-5">
+
+    <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center mb-5">
+
+            <div>
+
+                <h2 class="section-title">Upcoming Major Events</h2>
+
+                <p class="section-subtitle">
+                    Discover the latest hackathons, workshops and meetups.
+                </p>
+
+            </div>
+
+            <button class="btn view-btn">
+                View All
+            </button>
+
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Event 1 -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="event-card">
+
+                    <img src="images/event1.jpg" class="event-image">
+
+                    <div class="event-content">
+
+                        <span class="event-tag">
+                            Hackathon
+                        </span>
+
+                        <h4>
+                            AI Innovation Challenge 2026
+                        </h4>
+
+                        <p>
+                            Build AI-powered products with developers from across India.
+                        </p>
+
+                        <div class="event-info">
+
+                            <span>
+                                📅 25 July
+                            </span>
+
+                            <span>
+                                📍 Bengaluru
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Event 2 -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="event-card">
+
+                    <img src="images/event2.jpg" class="event-image">
+
+                    <div class="event-content">
+
+                        <span class="event-tag">
+                            Workshop
+                        </span>
+
+                        <h4>
+                            React & Next.js Bootcamp
+                        </h4>
+
+                        <p>
+                            Learn modern frontend development with industry experts.
+                        </p>
+
+                        <div class="event-info">
+
+                            <span>
+                                📅 28 July
+                            </span>
+
+                            <span>
+                                📍 Online
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Event 3 -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="event-card">
+
+                    <img src="images/event3.jpg" class="event-image">
+
+                    <div class="event-content">
+
+                        <span class="event-tag">
+                            Meetup
+                        </span>
+
+                        <h4>
+                            Startup Networking Night
+                        </h4>
+
+                        <p>
+                            Connect with founders, developers and investors.
+                        </p>
+
+                        <div class="event-info">
+
+                            <span>
+                                📅 30 July
+                            </span>
+
+                            <span>
+                                📍 Mumbai
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--nearby events-->
+
+<section class="nearby-events py-5">
+
+    <div class="container">
+
+        <div class="row g-5">
+
+            <!-- LEFT -->
+
+            <div class="col-lg-8">
+
+                <h2 class="section-heading mb-5">
+                    Nearby Events
+                </h2>
+
+                <div class="timeline">
+
+                    <!-- Event 1 -->
+
+                    <div class="timeline-item">
+
+                        <div class="date">
+                            <span>13 Jul</span>
+                            <small>Monday</small>
+                        </div>
+
+                        <div class="event-card">
+
+                            <div class="row align-items-center">
+
+                                <div class="col-md-9">
+
+                                    <p class="event-time">
+                                        11:00 AM
+                                    </p>
+
+                                    <h4>
+                                        ☕ Miro Monday Meetup | Pune
+                                    </h4>
+
+                                    <p class="host">
+                                        By Sudhir Kesharwani & Miro Community
+                                    </p>
+
+                                    <p class="location">
+                                        <i class="bi bi-geo-alt"></i>
+                                        Quick Stories - Fine Dine Bistro
+                                    </p>
+
+                                    <div class="attendees">
+
+                                        <span class="sold">Sold Out</span>
+
+                                        <img src="https://i.pravatar.cc/35?img=1">
+                                        <img src="https://i.pravatar.cc/35?img=2">
+                                        <img src="https://i.pravatar.cc/35?img=3">
+                                        <img src="https://i.pravatar.cc/35?img=4">
+
+                                        <span class="count">+19</span>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-3 text-end">
+
+                                    <img src="images/event1.jpg" class="banner">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Event 2 -->
+
+                    <div class="timeline-item">
+
+                        <div class="date">
+                            <span>18 Jul</span>
+                            <small>Saturday</small>
+                        </div>
+
+                        <div class="event-card">
+
+                            <div class="row align-items-center">
+
+                                <div class="col-md-9">
+
+                                    <p class="event-time">
+                                        10:00 AM
+                                    </p>
+
+                                    <h4>
+                                        Decode Process Intelligence
+                                    </h4>
+
+                                    <p class="host">
+                                        By Celonis Community
+                                    </p>
+
+                                    <p class="location">
+                                        <i class="bi bi-geo-alt"></i>
+                                        Clover Park
+                                    </p>
+
+                                    <div class="attendees">
+
+                                        <img src="https://i.pravatar.cc/35?img=10">
+                                        <img src="https://i.pravatar.cc/35?img=11">
+                                        <img src="https://i.pravatar.cc/35?img=12">
+
+                                        <span class="count">+67</span>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-3 text-end">
+
+                                    <img src="images/event2.jpg" class="banner">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- RIGHT -->
+
+            <div class="col-lg-4">
+
+                <div class="community-card">
+
+                    <div class="community-icon">
+
+                        <i class="bi bi-grid-3x3-gap-fill"></i>
+
+                    </div>
+
+                    <h2>Tech</h2>
+
+                    <p>
+
+                        Subscribe to stay updated with the latest
+                        events, workshops and community meetups.
+
+                    </p>
+
+                    <button class="btn subscribe-btn">
+
+                        Subscribed
+
+                    </button>
+
+                </div>
+
+                <div class="map-card mt-4">
+
+                    <img src="images/map.jpg">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+    <!--chatbot-->
+    <div class="chat-widget">
+
+    <div class="chat-popup">
+
+        <h6>
+            💬 Need Help?
+        </h6>
+
+        <p>
+            Ask me about events.
+        </p>
+
+    </div>
+
+    <button class="chat-btn">
+
+        <img
+            src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png"
+            alt="AI Bot"
+        >
+
+    </button>
+
+</div>
+
+
+
+</body>
+</html>
