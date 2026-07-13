@@ -178,9 +178,11 @@ function renderRegisteredEvents() {
 
                         <div class="event-buttons">
 
-                            <span class="status bg-success">
-                                Registered
-                            </span>
+                            <button
+                                class="btn btn-danger btn-sm cancel-btn"
+                                    data-id="${event.id}">
+                                    Cancel Registration
+                            </button>
 
                         </div>
 
@@ -204,6 +206,48 @@ function renderRegisteredEvents() {
     `).join("");
 
 }
+
+// ==========================================
+// CANCEL REGISTRATION
+// ==========================================
+
+document.addEventListener("click", function (e) {
+
+    if (!e.target.classList.contains("cancel-btn")) {
+
+        return;
+
+    }
+
+    const eventId = e.target.dataset.id;
+
+    const events = getEvents();
+
+    const event = events.find(
+        ev => String(ev.id) === String(eventId)
+    );
+
+    if (!event) {
+
+        alert("Event not found.");
+        return;
+
+    }
+
+    // Remove current user
+    event.attendees = event.attendees.filter(attendee =>
+        attendee.id !== CURRENT_USER_ID
+    );
+
+    // Save changes
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(events));
+
+    alert("Registration Cancelled!");
+
+    // Reload page
+    location.reload();
+
+});
 
 // ==========================================
 // PAGE LOAD

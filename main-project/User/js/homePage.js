@@ -218,14 +218,26 @@ function createEventCard(event){
 
                         </span>
 
-                        <button
-                            class="event-btn register-btn"
-                            data-id="${event.id}"
-                        >
+                        ${
+                        event.attendees?.some(user => user.id === "USER_001")
 
-                            Register
+                        ?
+                        
+                `<button
+                        class="event-btn"
+                        disabled
+                        style="background:#198754;cursor:not-allowed;">
+                        ✓ Registered
+                    </button>`
 
-                        </button>
+                    :
+
+                    `<button
+                        class="event-btn register-btn"
+                        data-id="${event.id}">
+                        Register
+                </button>`
+}
 
                     </div>
 
