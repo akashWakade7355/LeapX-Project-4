@@ -410,6 +410,8 @@ Google Font
 
     border-radius:50%;
 
+    object-fit: cover;
+
 }
 
 .city-card h5{

@@ -697,4 +697,21 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    const locationLinks = document.querySelectorAll(".location-card-link");
+    locationLinks.forEach(link => {
+        link.addEventListener("click", () => {
+            const loc = link.getAttribute("data-location");
+            if (loc) {
+                if (searchQueryInput) searchQueryInput.value = loc;
+                if (categoryFilter) categoryFilter.value = "";
+                if (dateFilter) dateFilter.value = "";
+                filterEvents();
+                const discoverSection = document.querySelector(".discover-events");
+                if (discoverSection) {
+                    discoverSection.scrollIntoView({ behavior: "smooth" });
+                }
+            }
+        });
+    });
+
 });
