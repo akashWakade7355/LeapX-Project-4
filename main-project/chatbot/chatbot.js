@@ -1,5 +1,4 @@
 
-
 const openChatBtn = document.getElementById("openChat");
 const closeChatBtn = document.getElementById("closeChat");
 
@@ -31,6 +30,8 @@ closeChatBtn.addEventListener("click", () => {
     chatPopup.style.display = "block";
 
 });
+
+// message generating function
 
 function addMessage(message, sender) {
 
@@ -64,6 +65,7 @@ function getCurrentTime() {
     });
 
 }
+
 // bot response 
 
 function getBotResponse(userMessage){
@@ -89,6 +91,9 @@ Try asking:
 • Weekend Events`;
 }
 
+
+// this function does the main part 
+
 function sendMessage(){
     const message = userInput.value.trim();
 
@@ -112,6 +117,7 @@ userInput.addEventListener("keydown",(event)=>{
           sendMessage();
 });
 
+// user input through buttons
 
 const suggestionBtns=document.querySelectorAll(".suggestion-btn"); 
 
