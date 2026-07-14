@@ -1,0 +1,380 @@
+
+        /*===============================
+Google Font
+================================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    background:#0F172A;
+    color:#fff;
+}
+
+/*===============================
+Section
+================================*/
+
+.create-event{
+
+    padding:70px 0;
+}
+
+.page-title{
+
+    text-align:center;
+}
+
+.page-title h1{
+
+    font-size:42px;
+    font-weight:700;
+}
+
+.page-title p{
+
+    color:#94A3B8;
+    margin-top:10px;
+}
+
+
+/*===============================
+Card
+================================*/
+
+.card-box{
+
+    background:#1E293B;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    border-radius:22px;
+
+    padding:28px;
+
+    transition:.35s;
+}
+
+.card-box:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 20px 45px rgba(0,0,0,.25);
+}
+
+
+/*===============================
+Section Heading
+================================*/
+
+.section-title{
+
+    font-size:22px;
+
+    font-weight:600;
+
+    margin-bottom:25px;
+}
+
+.section-title i{
+
+    color:#3B82F6;
+
+    margin-right:10px;
+}
+
+
+/*===============================
+Labels
+================================*/
+
+label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-size:14px;
+
+    font-weight:500;
+
+    color:#CBD5E1;
+}
+
+
+/*===============================
+Inputs
+================================*/
+
+.form-control,
+.form-select{
+
+    height:52px;
+
+    background:#0F172A;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    color:white;
+
+    border-radius:14px;
+
+    transition:.3s;
+}
+
+textarea.form-control{
+
+    height:auto;
+    resize:none;
+}
+
+.form-control:focus,
+.form-select:focus{
+
+    background:#0F172A;
+
+    color:white;
+
+    border-color:#3B82F6;
+
+    box-shadow:none;
+}
+
+.form-control::placeholder{
+
+    color:#64748B;
+}
+
+.form-select option{
+
+    color:black;
+}
+
+/* Validation error styling (added) */
+.form-control.is-invalid,
+.form-select.is-invalid{
+    border-color:#EF4444;
+}
+
+.error-summary{
+    background:rgba(239,68,68,.1);
+    border:1px solid rgba(239,68,68,.4);
+    color:#FCA5A5;
+    border-radius:14px;
+    padding:16px 20px;
+    margin-bottom:22px;
+    display:none;
+}
+
+.error-summary ul{
+    margin:8px 0 0 20px;
+}
+
+/* Success banner (added) */
+.success-banner{
+    background:rgba(34,197,94,.1);
+    border:1px solid rgba(34,197,94,.4);
+    color:#86EFAC;
+    border-radius:14px;
+    padding:16px 20px;
+    margin-bottom:22px;
+    display:none;
+    font-weight:500;
+}
+
+.success-banner i{
+    margin-right:8px;
+}
+
+
+/*===============================
+Banner
+================================*/
+
+.banner-preview{
+
+    width:100%;
+
+    height:470px;
+
+    overflow:hidden;
+
+    border-radius:18px;
+
+    background:#0F172A;
+
+    border:2px dashed rgba(255,255,255,.08);
+}
+
+.banner-preview img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+}
+
+
+/*===============================
+Upload Button
+================================*/
+
+.upload-btn{
+
+    width:100%;
+
+    background:#2563EB;
+
+    color:white;
+
+    text-align:center;
+
+    padding:14px;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-weight:500;
+
+    transition:.3s;
+}
+
+.upload-btn:hover{
+
+    background:#1D4ED8;
+}
+
+.upload-btn i{
+
+    margin-right:8px;
+}
+
+
+/*===============================
+Buttons
+================================*/
+
+.btn-primary{
+
+    background:#2563EB;
+
+    border:none;
+
+    border-radius:12px;
+
+    height:52px;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.btn-primary:hover{
+
+    background:#1D4ED8;
+
+    transform:translateY(-2px);
+}
+
+.btn-outline-light{
+
+    border-radius:12px;
+
+    height:52px;
+}
+
+
+/*===============================
+Spacing
+================================*/
+
+.mb-3{
+
+    margin-bottom:22px !important;
+}
+
+.mt-4{
+
+    margin-top:35px !important;
+}
+
+
+/*===============================
+Scrollbar
+================================*/
+
+::-webkit-scrollbar{
+
+    width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#334155;
+
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-track{
+
+    background:#0F172A;
+}
+
+
+/*===============================
+Responsive
+================================*/
+
+@media(max-width:991px){
+
+.banner-preview{
+
+height:350px;
+}
+
+.page-title h1{
+
+font-size:34px;
+}
+
+.card-box{
+
+padding:22px;
+}
+
+}
+
+@media(max-width:768px){
+
+.page-title h1{
+
+font-size:30px;
+}
+
+.banner-preview{
+
+height:280px;
+}
+
+.btn{
+
+width:100%;
+
+margin-top:10px;
+}
+
+.text-end{
+
+text-align:center !important;
+}
+
+}

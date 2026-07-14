@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Event</title>
+
+    <!-- Bootstrap -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="../css/manage-events.css">
+
+</head>
+
+<body>
+
+
+
+<!-- =======================================
+Navbar
+======================================== -->
+<nav class="navbar navbar-expand-lg">
+
+    <div class="container">
+
+        <a class="navbar-brand fw-bold" href="#">
+            EventHub
+        </a>
+
+        <div class="d-flex align-items-center">
+
+
+  
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+
+
+<!-- =======================================
+Event Banner
+======================================== -->
+
+<section class="py-5">
+
+<div class="container">
+
+<div class="event-banner-card">
+
+<img id="eventBanner"
+     src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=1600">
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- =======================================
+Event Information
+======================================== -->
+
+<section>
+
+<div class="container">
+
+<div class="event-info-card">
+
+<div class="row">
+
+<div class="col-lg-8">
+
+<span class="badge bg-primary mb-3"
+      id="eventCategory">
+
+Technology
+
+</span>
+
+<h2 id="eventTitle">
+
+AI Workshop
+
+</h2>
+
+<p id="eventDescription">
+
+Learn AI from industry experts.
+
+</p>
+
+<div class="event-meta">
+
+<span>
+
+<i class="bi bi-calendar3"></i>
+
+<span id="eventDate">
+
+12 July 2026
+
+</span>
+
+</span>
+
+<span>
+
+<i class="bi bi-clock"></i>
+
+<span id="eventTime">
+
+10:00 AM
+
+</span>
+
+</span>
+
+<span>
+
+<i class="bi bi-geo-alt"></i>
+
+<span id="eventLocation">
+
+Bengaluru
+
+</span>
+
+</span>
+
+</div>
+
+</div>
+
+<div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+
+<span class="visibility-badge"
+      id="eventVisibility">
+
+Public
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- =======================================
+Statistics
+======================================== -->
+
+<section class="py-5">
+
+<div class="container">
+
+<div class="row g-4">
+
+<div class="col-md-6">
+
+<div class="stats-card">
+
+<h2 id="goingCount">
+
+0
+
+</h2>
+
+<p>
+
+Going
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-6">
+
+<div class="stats-card">
+
+<h2 id="pendingCount">
+
+0
+
+</h2>
+
+<p>
+
+Pending
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- =======================================
+Pending Requests
+======================================== -->
+
+<section class="pb-5">
+
+<div class="container">
+
+<h3 class="section-title">
+
+Pending Requests
+
+</h3>
+
+<div id="pendingContainer">
+
+<!-- JS -->
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- =======================================
+Registered Users
+======================================== -->
+
+<section class="pb-5">
+
+<div class="container">
+
+<h3 class="section-title">
+
+Registered Users
+
+</h3>
+
+<div id="goingContainer">
+
+<!-- JS -->
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- =======================================
+Danger Zone
+======================================== -->
+
+<section class="pb-5">
+
+<div class="container">
+
+<div class="danger-card">
+
+<h3>
+
+Danger Zone
+
+</h3>
+
+<p>
+
+These actions cannot be undone.
+
+</p>
+
+<div class="d-flex gap-3 flex-wrap">
+
+<button class="btn btn-primary"
+        id="editEvent">
+
+<i class="bi bi-pencil-square"></i>
+
+Edit Event
+
+</button>
+
+
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- Bootstrap -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- JS -->
+
+<script src="../js/manage-events.js"></script>
+</body>
+
+</html>
