@@ -547,3 +547,36 @@ Google Font
 .no-events p{
     color:#9CB4DA;
 }
+
+/*==================================
+      FILTER CONTROLS STYLING
+==================================*/
+
+.discover-events .form-control,
+.discover-events .form-select {
+    background-color: #101B34;
+    border: 1px solid #26406A;
+    color: #fff;
+    border-radius: 12px;
+    padding: 10px 16px;
+    transition: all 0.3s ease;
+}
+
+.discover-events .form-control::placeholder {
+    color: #9CB4DA;
+    opacity: 0.6;
+}
+
+.discover-events .form-control:focus,
+.discover-events .form-select:focus {
+    background-color: #162548;
+    border-color: #3B82F6;
+    color: #fff;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+    outline: none;
+}
+
+.discover-events .form-select option {
+    background-color: #101B34;
+    color: #fff;
+}
