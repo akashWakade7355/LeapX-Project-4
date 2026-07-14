@@ -686,6 +686,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const cat = link.getAttribute("data-category");
             if (cat) {
                 categoryFilter.value = cat;
+                if (dateFilter) dateFilter.value = "";
+                if (searchQueryInput) searchQueryInput.value = "";
                 filterEvents();
                 const discoverSection = document.querySelector(".discover-events");
                 if (discoverSection) {
