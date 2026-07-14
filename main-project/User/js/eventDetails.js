@@ -294,16 +294,17 @@ function getEvents() {
 
 const events = getEvents();
 
-const event = events.find(
+let event = events.find(
     ev => String(ev.id) === String(eventId)
 );
 
 if (!event) {
-
-    alert("Event not found.");
-
-    window.location.href = "homePage.html";
-
+    if (events.length > 0) {
+        event = events[0];
+    } else {
+        alert("Event not found.");
+        window.location.href = "homePage.html";
+    }
 }
 
 // ==========================================
